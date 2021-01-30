@@ -3,34 +3,40 @@ package com.devel.stillcareBackend;
 import com.devel.stillcareBackend.model.TabletteEntity;
 import com.devel.stillcareBackend.services.TabletteService;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
+import com.ulisesbocchio.jasyptspringboot.annotation.EncryptablePropertySource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.dao.DataAccessException;
 
 import java.util.Arrays;
-import java.util.List;
 
 @SpringBootApplication
 @Configuration
-@EnableEncryptableProperties
+@PropertySource("encrypted.properties")
+@EncryptablePropertySource("encrypted.properties")
 public class StillcareBackendApplication implements CommandLineRunner {
 
 	@Autowired
 	TabletteService tabletteService;
+
+
 	public static void main(String[] args) {
 
 		SpringApplication.run(StillcareBackendApplication.class, args);
 		System.out.println("Introducing Barca player");
 
 
+
+
+
 	}
 
 	@Override
 	public void run(String... arg0) throws Exception {
-
 
 		//Do some data operation
 
