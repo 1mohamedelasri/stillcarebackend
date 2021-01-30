@@ -1,7 +1,7 @@
 package com.devel.stillcareBackend.services;
 
 
-import com.devel.stillcareBackend.dao.TabletteDAO;
+import com.devel.stillcareBackend.respository.TabletteRepository;
 import com.devel.stillcareBackend.model.TabletteEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,23 +14,23 @@ import java.util.List;
 public class TabletteService {
 
     @Autowired
-    private TabletteDAO productDao;
+    private TabletteRepository tabletteRespository;
 
     @Transactional
     public void add(TabletteEntity product) {
-        productDao.persist(product);
+        tabletteRespository.save(product);
     }
 
     @Transactional
     public void addAll(Collection<TabletteEntity> products) {
         for (TabletteEntity product : products) {
-            productDao.persist(product);
+            tabletteRespository.save(product);
         }
     }
 
     @Transactional(readOnly = true)
     public List<TabletteEntity> listAll() {
-        return productDao.findAll();
+        return tabletteRespository.findAll();
 
     }
 
