@@ -1,14 +1,14 @@
 package com.devel.stillcareBackend.model;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name = "AFFECTATION_PERSONNEL", schema = "ELASRIM", catalog = "")
 @IdClass(AffectationPersonnelEntityPK.class)
 public class AffectationPersonnelEntity {
     private long idUnite;
-    private long idResident;
+    private long idPersonnel;
     private Date datedebut;
     private Date datefin;
 
@@ -23,13 +23,13 @@ public class AffectationPersonnelEntity {
     }
 
     @Id
-    @Column(name = "ID_RESIDENT")
-    public long getIdResident() {
-        return idResident;
+    @Column(name = "ID_PERSONNEL")
+    public long getIdPersonnel() {
+        return idPersonnel;
     }
 
-    public void setIdResident(long idResident) {
-        this.idResident = idResident;
+    public void setIdPersonnel(long idPersonnel) {
+        this.idPersonnel = idPersonnel;
     }
 
     @Basic
@@ -60,7 +60,7 @@ public class AffectationPersonnelEntity {
         AffectationPersonnelEntity that = (AffectationPersonnelEntity) o;
 
         if (idUnite != that.idUnite) return false;
-        if (idResident != that.idResident) return false;
+        if (idPersonnel != that.idPersonnel) return false;
         if (datedebut != null ? !datedebut.equals(that.datedebut) : that.datedebut != null) return false;
         if (datefin != null ? !datefin.equals(that.datefin) : that.datefin != null) return false;
 
@@ -70,7 +70,7 @@ public class AffectationPersonnelEntity {
     @Override
     public int hashCode() {
         int result = (int) (idUnite ^ (idUnite >>> 32));
-        result = 31 * result + (int) (idResident ^ (idResident >>> 32));
+        result = 31 * result + (int) (idPersonnel ^ (idPersonnel >>> 32));
         result = 31 * result + (datedebut != null ? datedebut.hashCode() : 0);
         result = 31 * result + (datefin != null ? datefin.hashCode() : 0);
         return result;

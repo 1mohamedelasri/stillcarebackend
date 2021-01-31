@@ -1,7 +1,7 @@
 package com.devel.stillcareBackend.model;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name = "AFFECTATION_RESIDENT", schema = "ELASRIM", catalog = "")

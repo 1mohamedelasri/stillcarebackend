@@ -1,10 +1,10 @@
 package com.devel.stillcareBackend.model;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
-@Table(name = "RESIDENT", schema = "ELASRIM")
+@Table(name = "RESIDENT", schema = "ELASRIM", catalog = "")
 public class ResidentEntity {
     private long idResident;
     private long idPersonnel;

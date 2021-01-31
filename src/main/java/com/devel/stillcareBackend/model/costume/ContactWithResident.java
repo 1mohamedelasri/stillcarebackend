@@ -1,9 +1,7 @@
 package com.devel.stillcareBackend.model.costume;
 
+
 import com.devel.stillcareBackend.model.ContactEntity;
-
-import java.util.Map;
-
 
 public class ContactWithResident {
     private ContactEntity contact;

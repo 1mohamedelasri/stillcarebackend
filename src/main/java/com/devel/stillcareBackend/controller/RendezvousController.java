@@ -43,12 +43,16 @@ public class RendezvousController {
     RendezvousEntity replaceRendezvous(@RequestBody RendezvousEntity newRendezvous, @PathVariable Long id) {
 
         return repository.findById(id)
-                .map(Rendezvous -> {
-                    Rendezvous.setEtat(newRendezvous.getEtat());
-                    Rendezvous.setDateheuredebut(newRendezvous.getDateheuredebut());
-                    Rendezvous.setDateheurefin(newRendezvous.getDateheurefin());
-                    Rendezvous.setStatut(newRendezvous.getStatut());
-                    return repository.save(Rendezvous);
+                .map(rendezvous -> {
+                    rendezvous.setEtat(newRendezvous.getEtat());
+                    rendezvous.setDatedebut(newRendezvous.getDatedebut());
+                    rendezvous.setDateheurefin(newRendezvous.getDateheurefin());
+                    rendezvous.setStatut(newRendezvous.getStatut());
+                    rendezvous.setCreId(newRendezvous.getCreId());
+                    rendezvous.setIdPersonnel(newRendezvous.getIdPersonnel());
+                    rendezvous.setNtablette(newRendezvous.getNtablette());
+                    rendezvous.setIdResident(newRendezvous.getIdResident());
+                    return repository.save(rendezvous);
                 })
                 .orElseGet(() -> {
                     newRendezvous.setIdRdv(id);

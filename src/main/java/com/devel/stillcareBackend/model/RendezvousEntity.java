@@ -1,7 +1,7 @@
 package com.devel.stillcareBackend.model;
 
 import javax.persistence.*;
-import java.sql.Time;
+import java.util.Date;
 
 @Entity
 @Table(name = "RENDEZVOUS", schema = "ELASRIM", catalog = "")
@@ -10,11 +10,10 @@ public class RendezvousEntity {
     private Long idPersonnel;
     private long idContact;
     private long idResident;
-    private long creIdPersonnel;
-    private Time datedebut;
+    private Date creId;
+    private Date datedebut;
     private Long ntablette;
-    private Time dateheuredebut;
-    private Time dateheurefin;
+    private Date dateheurefin;
     private String statut;
     private String etat;
 
@@ -59,22 +58,22 @@ public class RendezvousEntity {
     }
 
     @Basic
-    @Column(name = "CRE_ID_PERSONNEL")
-    public long getCreIdPersonnel() {
-        return creIdPersonnel;
+    @Column(name = "CRE_ID")
+    public Date getCreId() {
+        return creId;
     }
 
-    public void setCreIdPersonnel(long creIdPersonnel) {
-        this.creIdPersonnel = creIdPersonnel;
+    public void setCreId(Date creId) {
+        this.creId = creId;
     }
 
     @Basic
     @Column(name = "DATEDEBUT")
-    public Time getDatedebut() {
+    public Date getDatedebut() {
         return datedebut;
     }
 
-    public void setDatedebut(Time datedebut) {
+    public void setDatedebut(Date datedebut) {
         this.datedebut = datedebut;
     }
 
@@ -89,22 +88,12 @@ public class RendezvousEntity {
     }
 
     @Basic
-    @Column(name = "DATEHEUREDEBUT")
-    public Time getDateheuredebut() {
-        return dateheuredebut;
-    }
-
-    public void setDateheuredebut(Time dateheuredebut) {
-        this.dateheuredebut = dateheuredebut;
-    }
-
-    @Basic
     @Column(name = "DATEHEUREFIN")
-    public Time getDateheurefin() {
+    public Date getDateheurefin() {
         return dateheurefin;
     }
 
-    public void setDateheurefin(Time dateheurefin) {
+    public void setDateheurefin(Date dateheurefin) {
         this.dateheurefin = dateheurefin;
     }
 
@@ -138,12 +127,10 @@ public class RendezvousEntity {
         if (idRdv != that.idRdv) return false;
         if (idContact != that.idContact) return false;
         if (idResident != that.idResident) return false;
-        if (creIdPersonnel != that.creIdPersonnel) return false;
         if (idPersonnel != null ? !idPersonnel.equals(that.idPersonnel) : that.idPersonnel != null) return false;
+        if (creId != null ? !creId.equals(that.creId) : that.creId != null) return false;
         if (datedebut != null ? !datedebut.equals(that.datedebut) : that.datedebut != null) return false;
         if (ntablette != null ? !ntablette.equals(that.ntablette) : that.ntablette != null) return false;
-        if (dateheuredebut != null ? !dateheuredebut.equals(that.dateheuredebut) : that.dateheuredebut != null)
-            return false;
         if (dateheurefin != null ? !dateheurefin.equals(that.dateheurefin) : that.dateheurefin != null) return false;
         if (statut != null ? !statut.equals(that.statut) : that.statut != null) return false;
         if (etat != null ? !etat.equals(that.etat) : that.etat != null) return false;
@@ -157,10 +144,9 @@ public class RendezvousEntity {
         result = 31 * result + (idPersonnel != null ? idPersonnel.hashCode() : 0);
         result = 31 * result + (int) (idContact ^ (idContact >>> 32));
         result = 31 * result + (int) (idResident ^ (idResident >>> 32));
-        result = 31 * result + (int) (creIdPersonnel ^ (creIdPersonnel >>> 32));
+        result = 31 * result + (creId != null ? creId.hashCode() : 0);
         result = 31 * result + (datedebut != null ? datedebut.hashCode() : 0);
         result = 31 * result + (ntablette != null ? ntablette.hashCode() : 0);
-        result = 31 * result + (dateheuredebut != null ? dateheuredebut.hashCode() : 0);
         result = 31 * result + (dateheurefin != null ? dateheurefin.hashCode() : 0);
         result = 31 * result + (statut != null ? statut.hashCode() : 0);
         result = 31 * result + (etat != null ? etat.hashCode() : 0);

@@ -3,17 +3,15 @@ package com.devel.stillcareBackend.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "CONTACT", schema = "ELASRIM")
+@Table(name = "CONTACT", schema = "ELASRIM", catalog = "")
 public class ContactEntity {
-    private long   idContact;
+    private long idContact;
     private String nom;
     private String prenom;
     private String numtel;
     private String firebasetoken;
     private String statutcompte;
     private String mail;
-
-
 
     @Id
     @Column(name = "ID_CONTACT")

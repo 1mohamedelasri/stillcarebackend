@@ -3,7 +3,6 @@ package com.devel.stillcareBackend.controller;
 import com.devel.stillcareBackend.exception.exceptionmodels.BadParametersException;
 import com.devel.stillcareBackend.exception.exceptionmodels.NotFoundException;
 import com.devel.stillcareBackend.model.ContactEntity;
-import com.devel.stillcareBackend.model.PersonnelEntity;
 import com.devel.stillcareBackend.model.costume.ContactWithResident;
 import com.devel.stillcareBackend.repositories.ContactRepository;
 import com.devel.stillcareBackend.services.CompteService;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class ContactController {
