@@ -1,14 +1,11 @@
 package com.devel.stillcareBackend.controller;
 
+import com.devel.stillcareBackend.exception.exceptionmodels.NotFoundException;
 import com.devel.stillcareBackend.model.TabletteEntity;
-import com.devel.stillcareBackend.respository.TabletteRepository;
-import com.devel.stillcareBackend.services.TabletteService;
-import exception.TabletteNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.devel.stillcareBackend.repositories.TabletteRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 public class TabletteController {
@@ -29,26 +26,26 @@ public class TabletteController {
     // end::get-aggregate-root[]
 
     @PostMapping("/tablettes")
-    TabletteEntity newEmployee(@RequestBody TabletteEntity newTablette) {
+    TabletteEntity newTablette(@RequestBody TabletteEntity newTablette) {
         return repository.save(newTablette);
     }
 
     // Single item
 
     @GetMapping("/tablettes/{id}")
-    TabletteEntity one(@PathVariable Integer id) {
+    TabletteEntity one(@PathVariable Long id) {
 
         return repository.findById(id)
-                .orElseThrow(() -> new TabletteNotFoundException(id));
+                .orElseThrow(() -> new NotFoundException("Tablette with" + id));
     }
 
     @PutMapping("/tablettes/{id}")
-    TabletteEntity replaceEmployee(@RequestBody TabletteEntity newTablette, @PathVariable Integer id) {
+    TabletteEntity replaceTablette(@RequestBody TabletteEntity newTablette, @PathVariable Long id) {
 
         return repository.findById(id)
-                .map(employee -> {
-                    employee.setEtat(newTablette.getEtat());
-                    return repository.save(employee);
+                .map(Tablette -> {
+                    Tablette.setEtat(newTablette.getEtat());
+                    return repository.save(Tablette);
                 })
                 .orElseGet(() -> {
                     newTablette.setNtablette(id);
@@ -57,8 +54,8 @@ public class TabletteController {
     }
 
     @DeleteMapping("/tablettes/{id}")
-    void deleteEmployee(@PathVariable String id) {
-        repository.deleteById(Integer.parseInt(id));
+    void deleteTablette(@PathVariable Long id) {
+        repository.deleteById(id);
     }
 
 }

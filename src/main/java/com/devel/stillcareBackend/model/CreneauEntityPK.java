@@ -3,11 +3,11 @@ package com.devel.stillcareBackend.model;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.sql.Time;
+import java.util.Date;
 
 public class CreneauEntityPK implements Serializable {
     private long idPersonnel;
-    private Time datedebut;
+    private Date datedebut;
 
     @Column(name = "ID_PERSONNEL")
     @Id
@@ -21,11 +21,11 @@ public class CreneauEntityPK implements Serializable {
 
     @Column(name = "DATEDEBUT")
     @Id
-    public Time getDatedebut() {
+    public Date getDatedebut() {
         return datedebut;
     }
 
-    public void setDatedebut(Time datedebut) {
+    public void setDatedebut(Date datedebut) {
         this.datedebut = datedebut;
     }
 

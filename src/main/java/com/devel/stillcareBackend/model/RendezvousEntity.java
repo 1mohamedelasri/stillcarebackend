@@ -1,14 +1,14 @@
 package com.devel.stillcareBackend.model;
 
 import javax.persistence.*;
-import java.sql.Time;
+import java.util.Date;
 
 @Entity
 @Table(name = "RENDEZVOUS", schema = "ELASRIM", catalog = "")
 public class RendezvousEntity {
     private long idRdv;
-    private Time dateheuredebut;
-    private Time dateheurefin;
+    private Date dateheuredebut;
+    private Date dateheurefin;
     private String statut;
     private String etat;
 
@@ -24,21 +24,21 @@ public class RendezvousEntity {
 
     @Basic
     @Column(name = "DATEHEUREDEBUT")
-    public Time getDateheuredebut() {
+    public Date getDateheuredebut() {
         return dateheuredebut;
     }
 
-    public void setDateheuredebut(Time dateheuredebut) {
+    public void setDateheuredebut(Date dateheuredebut) {
         this.dateheuredebut = dateheuredebut;
     }
 
     @Basic
     @Column(name = "DATEHEUREFIN")
-    public Time getDateheurefin() {
+    public Date getDateheurefin() {
         return dateheurefin;
     }
 
-    public void setDateheurefin(Time dateheurefin) {
+    public void setDateheurefin(Date dateheurefin) {
         this.dateheurefin = dateheurefin;
     }
 
