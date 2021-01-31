@@ -4,7 +4,6 @@ package com.devel.stillcareBackend.services;
 import com.devel.stillcareBackend.model.ContactEntity;
 import com.devel.stillcareBackend.repositories.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,8 +1,12 @@
 package com.devel.stillcareBackend.controller;
 
+import com.devel.stillcareBackend.exception.exceptionmodels.BadParametersException;
 import com.devel.stillcareBackend.exception.exceptionmodels.NotFoundException;
 import com.devel.stillcareBackend.model.ContactEntity;
+import com.devel.stillcareBackend.model.costume.ContactWithResident;
 import com.devel.stillcareBackend.repositories.ContactRepository;
+import com.devel.stillcareBackend.services.CompteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +15,9 @@ import java.util.List;
 public class ContactController {
 
     private final ContactRepository repository;
+
+    @Autowired
+    CompteService compteService;
 
     ContactController(ContactRepository repository) {
         this.repository = repository;
@@ -25,12 +32,12 @@ public class ContactController {
     }
     // end::get-aggregate-root[]
 
-    @PostMapping("/contacts")
-    ContactEntity newContact(@RequestBody ContactEntity newContact) {
-        return repository.save(newContact);
-    }
-
     // Single item
+    @PostMapping("/contacts")
+    Object newContact(@RequestBody ContactWithResident obj) {
+        if(obj == null) throw new BadParametersException(obj.toString());
+        return compteService.SaveContactWithResident(obj);
+    }
 
     @GetMapping("/contacts/{id}")
     ContactEntity one(@PathVariable Long id) {
@@ -59,5 +66,7 @@ public class ContactController {
     void deleteContact(@PathVariable Long id) {
         repository.deleteById(id);
     }
+
+
 
 }

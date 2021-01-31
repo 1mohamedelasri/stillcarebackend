@@ -2,7 +2,6 @@ package com.devel.stillcareBackend.services;
 
 
 import com.devel.stillcareBackend.model.RendezvousEntity;
-import com.devel.stillcareBackend.model.ResidentEntity;
 import com.devel.stillcareBackend.repositories.RendezvousRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

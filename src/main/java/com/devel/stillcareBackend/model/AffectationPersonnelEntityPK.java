@@ -4,9 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-public class AncienaffectationEntityPK implements Serializable {
+public class AffectationPersonnelEntityPK implements Serializable {
     private long idUnite;
-    private long idResident;
+    private long idPersonnel;
 
     @Column(name = "ID_UNITE")
     @Id
@@ -18,14 +18,14 @@ public class AncienaffectationEntityPK implements Serializable {
         this.idUnite = idUnite;
     }
 
-    @Column(name = "ID_RESIDENT")
+    @Column(name = "ID_PERSONNEL")
     @Id
-    public long getIdResident() {
-        return idResident;
+    public long getIdPersonnel() {
+        return idPersonnel;
     }
 
-    public void setIdResident(long idResident) {
-        this.idResident = idResident;
+    public void setIdPersonnel(long idPersonnel) {
+        this.idPersonnel = idPersonnel;
     }
 
     @Override
@@ -33,10 +33,10 @@ public class AncienaffectationEntityPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AncienaffectationEntityPK that = (AncienaffectationEntityPK) o;
+        AffectationPersonnelEntityPK that = (AffectationPersonnelEntityPK) o;
 
         if (idUnite != that.idUnite) return false;
-        if (idResident != that.idResident) return false;
+        if (idPersonnel != that.idPersonnel) return false;
 
         return true;
     }
@@ -44,7 +44,7 @@ public class AncienaffectationEntityPK implements Serializable {
     @Override
     public int hashCode() {
         int result = (int) (idUnite ^ (idUnite >>> 32));
-        result = 31 * result + (int) (idResident ^ (idResident >>> 32));
+        result = 31 * result + (int) (idPersonnel ^ (idPersonnel >>> 32));
         return result;
     }
 }

@@ -1,5 +1,6 @@
 package com.devel.stillcareBackend.exception;
 
+import com.devel.stillcareBackend.exception.exceptionmodels.BadParametersException;
 import com.devel.stillcareBackend.exception.exceptionmodels.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,30 +12,38 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.*;
 
+import java.sql.SQLException;
+
 @ControllerAdvice
 public class ExceptionHelper {
 
         private static final Logger logger = LoggerFactory.getLogger(ExceptionHelper.class);
 
-        @ExceptionHandler(value = { HttpClientErrorException.NotFound.class })
-        public ResponseEntity<Object> handleInvalidInputException(HttpClientErrorException.NotFound ex) {
+        @ResponseBody
+        @ExceptionHandler(HttpClientErrorException.NotFound.class)
+        @ResponseStatus(HttpStatus.BAD_REQUEST)
+        String handleUnauthorizedException(HttpClientErrorException.NotFound ex) {
                 logger.error("Invalid Input Exception: ",ex.getMessage());
-                return new ResponseEntity<Object>(ex.getMessage(),HttpStatus.BAD_REQUEST);
-
+                return ex.getMessage();
         }
 
-        @ExceptionHandler(value = { HttpClientErrorException.Unauthorized.class })
-        public ResponseEntity<Object> handleUnauthorizedException(HttpClientErrorException.Unauthorized ex) {
+
+        @ResponseBody
+        @ExceptionHandler(HttpClientErrorException.Unauthorized.class)
+        @ResponseStatus(HttpStatus.BAD_REQUEST)
+        String handleUnauthorizedException(HttpClientErrorException.Unauthorized ex) {
                 logger.error("Unauthorized Exception: ",ex.getMessage());
-                return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+                return ex.getMessage();
         }
 
-        @ExceptionHandler(value = { Exception.class })
-        public ResponseEntity<Object> handleException(Exception ex) {
-
-                logger.error("Exception: ",ex.getMessage());
-                return new ResponseEntity<Object>(ex.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        @ResponseBody
+        @ExceptionHandler(BadParametersException.class)
+        @ResponseStatus(HttpStatus.BAD_REQUEST)
+        String handleBadParametersException(BadParametersException ex) {
+                logger.error("Unauthorized Exception: ",ex.getMessage());
+                return ex.getMessage();
         }
+
 
         @ResponseBody
         @ExceptionHandler(NotFoundException.class)
@@ -42,4 +51,22 @@ public class ExceptionHelper {
         String employeeNotFoundHandler(NotFoundException ex) {
                 return ex.getMessage();
         }
+
+
+        @ResponseBody
+        @ExceptionHandler(Exception.class)
+        @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+        String handleException(Exception ex) {
+                logger.error("Exception: ",ex.getMessage());
+                return ex.getMessage();
+        }
+
+        @ResponseBody
+        @ExceptionHandler(SQLException.class)
+        @ResponseStatus(HttpStatus.BAD_REQUEST)
+        String handleSQLException(SQLException ex) {
+                logger.error("Unauthorized Exception: ",ex.getMessage());
+                return ex.getMessage();
+        }
+
 }

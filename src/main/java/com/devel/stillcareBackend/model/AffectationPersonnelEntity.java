@@ -4,13 +4,23 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "CRENEAU", schema = "ELASRIM", catalog = "")
-@IdClass(CreneauEntityPK.class)
-public class CreneauEntity {
+@Table(name = "AFFECTATION_PERSONNEL", schema = "ELASRIM", catalog = "")
+@IdClass(AffectationPersonnelEntityPK.class)
+public class AffectationPersonnelEntity {
+    private long idUnite;
     private long idPersonnel;
     private Date datedebut;
-    private Long idRdv;
-    private String etat;
+    private Date datefin;
+
+    @Id
+    @Column(name = "ID_UNITE")
+    public long getIdUnite() {
+        return idUnite;
+    }
+
+    public void setIdUnite(long idUnite) {
+        this.idUnite = idUnite;
+    }
 
     @Id
     @Column(name = "ID_PERSONNEL")
@@ -22,7 +32,7 @@ public class CreneauEntity {
         this.idPersonnel = idPersonnel;
     }
 
-    @Id
+    @Basic
     @Column(name = "DATEDEBUT")
     public Date getDatedebut() {
         return datedebut;
@@ -33,23 +43,13 @@ public class CreneauEntity {
     }
 
     @Basic
-    @Column(name = "ID_RDV")
-    public Long getIdRdv() {
-        return idRdv;
+    @Column(name = "DATEFIN")
+    public Date getDatefin() {
+        return datefin;
     }
 
-    public void setIdRdv(Long idRdv) {
-        this.idRdv = idRdv;
-    }
-
-    @Basic
-    @Column(name = "ETAT")
-    public String getEtat() {
-        return etat;
-    }
-
-    public void setEtat(String etat) {
-        this.etat = etat;
+    public void setDatefin(Date datefin) {
+        this.datefin = datefin;
     }
 
     @Override
@@ -57,22 +57,22 @@ public class CreneauEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CreneauEntity that = (CreneauEntity) o;
+        AffectationPersonnelEntity that = (AffectationPersonnelEntity) o;
 
+        if (idUnite != that.idUnite) return false;
         if (idPersonnel != that.idPersonnel) return false;
         if (datedebut != null ? !datedebut.equals(that.datedebut) : that.datedebut != null) return false;
-        if (idRdv != null ? !idRdv.equals(that.idRdv) : that.idRdv != null) return false;
-        if (etat != null ? !etat.equals(that.etat) : that.etat != null) return false;
+        if (datefin != null ? !datefin.equals(that.datefin) : that.datefin != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (idPersonnel ^ (idPersonnel >>> 32));
+        int result = (int) (idUnite ^ (idUnite >>> 32));
+        result = 31 * result + (int) (idPersonnel ^ (idPersonnel >>> 32));
         result = 31 * result + (datedebut != null ? datedebut.hashCode() : 0);
-        result = 31 * result + (idRdv != null ? idRdv.hashCode() : 0);
-        result = 31 * result + (etat != null ? etat.hashCode() : 0);
+        result = 31 * result + (datefin != null ? datefin.hashCode() : 0);
         return result;
     }
 }

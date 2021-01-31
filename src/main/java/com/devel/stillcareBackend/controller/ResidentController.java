@@ -39,6 +39,12 @@ public class ResidentController {
                 .orElseThrow(() -> new NotFoundException("Resident avec id = " +id));
     }
 
+    @GetMapping("/Residents/noAppointment")
+    List<ResidentEntity> ResidentSandRdv() {
+
+        return repository.listResidentSansRdv();
+    }
+
     @PutMapping("/Residents/{id}")
     ResidentEntity replaceResident(@RequestBody ResidentEntity newResident, @PathVariable Long id) {
 

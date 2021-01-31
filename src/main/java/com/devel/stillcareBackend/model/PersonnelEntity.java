@@ -1,7 +1,6 @@
 package com.devel.stillcareBackend.model;
 
 import javax.persistence.*;
-import java.sql.Time;
 
 @Entity
 @Table(name = "PERSONNEL", schema = "ELASRIM", catalog = "")
@@ -10,8 +9,12 @@ public class PersonnelEntity {
     private String mail;
     private String fonction;
     private String ntel;
-    private Time datedebut;
-    private Time datefin;
+    private long idEhpad;
+    private String login;
+    private String password;
+    private String nom;
+    private String personnel;
+    private String prenom;
 
     @Id
     @Column(name = "ID_PERSONNEL")
@@ -54,23 +57,63 @@ public class PersonnelEntity {
     }
 
     @Basic
-    @Column(name = "DATEDEBUT")
-    public Time getDatedebut() {
-        return datedebut;
+    @Column(name = "ID_EHPAD")
+    public long getIdEhpad() {
+        return idEhpad;
     }
 
-    public void setDatedebut(Time datedebut) {
-        this.datedebut = datedebut;
+    public void setIdEhpad(long idEhpad) {
+        this.idEhpad = idEhpad;
     }
 
     @Basic
-    @Column(name = "DATEFIN")
-    public Time getDatefin() {
-        return datefin;
+    @Column(name = "LOGIN")
+    public String getLogin() {
+        return login;
     }
 
-    public void setDatefin(Time datefin) {
-        this.datefin = datefin;
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    @Basic
+    @Column(name = "PASSWORD")
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Basic
+    @Column(name = "NOM")
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    @Basic
+    @Column(name = "PERSONNEL")
+    public String getPersonnel() {
+        return personnel;
+    }
+
+    public void setPersonnel(String personnel) {
+        this.personnel = personnel;
+    }
+
+    @Basic
+    @Column(name = "PRENOM")
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
     }
 
     @Override
@@ -81,11 +124,15 @@ public class PersonnelEntity {
         PersonnelEntity that = (PersonnelEntity) o;
 
         if (idPersonnel != that.idPersonnel) return false;
+        if (idEhpad != that.idEhpad) return false;
         if (mail != null ? !mail.equals(that.mail) : that.mail != null) return false;
         if (fonction != null ? !fonction.equals(that.fonction) : that.fonction != null) return false;
         if (ntel != null ? !ntel.equals(that.ntel) : that.ntel != null) return false;
-        if (datedebut != null ? !datedebut.equals(that.datedebut) : that.datedebut != null) return false;
-        if (datefin != null ? !datefin.equals(that.datefin) : that.datefin != null) return false;
+        if (login != null ? !login.equals(that.login) : that.login != null) return false;
+        if (password != null ? !password.equals(that.password) : that.password != null) return false;
+        if (nom != null ? !nom.equals(that.nom) : that.nom != null) return false;
+        if (personnel != null ? !personnel.equals(that.personnel) : that.personnel != null) return false;
+        if (prenom != null ? !prenom.equals(that.prenom) : that.prenom != null) return false;
 
         return true;
     }
@@ -96,8 +143,12 @@ public class PersonnelEntity {
         result = 31 * result + (mail != null ? mail.hashCode() : 0);
         result = 31 * result + (fonction != null ? fonction.hashCode() : 0);
         result = 31 * result + (ntel != null ? ntel.hashCode() : 0);
-        result = 31 * result + (datedebut != null ? datedebut.hashCode() : 0);
-        result = 31 * result + (datefin != null ? datefin.hashCode() : 0);
+        result = 31 * result + (int) (idEhpad ^ (idEhpad >>> 32));
+        result = 31 * result + (login != null ? login.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (nom != null ? nom.hashCode() : 0);
+        result = 31 * result + (personnel != null ? personnel.hashCode() : 0);
+        result = 31 * result + (prenom != null ? prenom.hashCode() : 0);
         return result;
     }
 }

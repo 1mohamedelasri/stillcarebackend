@@ -7,7 +7,12 @@ import java.util.Date;
 @Table(name = "RENDEZVOUS", schema = "ELASRIM", catalog = "")
 public class RendezvousEntity {
     private long idRdv;
-    private Date dateheuredebut;
+    private Long idPersonnel;
+    private long idContact;
+    private long idResident;
+    private Date creId;
+    private Date datedebut;
+    private Long ntablette;
     private Date dateheurefin;
     private String statut;
     private String etat;
@@ -23,13 +28,63 @@ public class RendezvousEntity {
     }
 
     @Basic
-    @Column(name = "DATEHEUREDEBUT")
-    public Date getDateheuredebut() {
-        return dateheuredebut;
+    @Column(name = "ID_PERSONNEL")
+    public Long getIdPersonnel() {
+        return idPersonnel;
     }
 
-    public void setDateheuredebut(Date dateheuredebut) {
-        this.dateheuredebut = dateheuredebut;
+    public void setIdPersonnel(Long idPersonnel) {
+        this.idPersonnel = idPersonnel;
+    }
+
+    @Basic
+    @Column(name = "ID_CONTACT")
+    public long getIdContact() {
+        return idContact;
+    }
+
+    public void setIdContact(long idContact) {
+        this.idContact = idContact;
+    }
+
+    @Basic
+    @Column(name = "ID_RESIDENT")
+    public long getIdResident() {
+        return idResident;
+    }
+
+    public void setIdResident(long idResident) {
+        this.idResident = idResident;
+    }
+
+    @Basic
+    @Column(name = "CRE_ID")
+    public Date getCreId() {
+        return creId;
+    }
+
+    public void setCreId(Date creId) {
+        this.creId = creId;
+    }
+
+    @Basic
+    @Column(name = "DATEDEBUT")
+    public Date getDatedebut() {
+        return datedebut;
+    }
+
+    public void setDatedebut(Date datedebut) {
+        this.datedebut = datedebut;
+    }
+
+    @Basic
+    @Column(name = "NTABLETTE")
+    public Long getNtablette() {
+        return ntablette;
+    }
+
+    public void setNtablette(Long ntablette) {
+        this.ntablette = ntablette;
     }
 
     @Basic
@@ -70,8 +125,12 @@ public class RendezvousEntity {
         RendezvousEntity that = (RendezvousEntity) o;
 
         if (idRdv != that.idRdv) return false;
-        if (dateheuredebut != null ? !dateheuredebut.equals(that.dateheuredebut) : that.dateheuredebut != null)
-            return false;
+        if (idContact != that.idContact) return false;
+        if (idResident != that.idResident) return false;
+        if (idPersonnel != null ? !idPersonnel.equals(that.idPersonnel) : that.idPersonnel != null) return false;
+        if (creId != null ? !creId.equals(that.creId) : that.creId != null) return false;
+        if (datedebut != null ? !datedebut.equals(that.datedebut) : that.datedebut != null) return false;
+        if (ntablette != null ? !ntablette.equals(that.ntablette) : that.ntablette != null) return false;
         if (dateheurefin != null ? !dateheurefin.equals(that.dateheurefin) : that.dateheurefin != null) return false;
         if (statut != null ? !statut.equals(that.statut) : that.statut != null) return false;
         if (etat != null ? !etat.equals(that.etat) : that.etat != null) return false;
@@ -82,7 +141,12 @@ public class RendezvousEntity {
     @Override
     public int hashCode() {
         int result = (int) (idRdv ^ (idRdv >>> 32));
-        result = 31 * result + (dateheuredebut != null ? dateheuredebut.hashCode() : 0);
+        result = 31 * result + (idPersonnel != null ? idPersonnel.hashCode() : 0);
+        result = 31 * result + (int) (idContact ^ (idContact >>> 32));
+        result = 31 * result + (int) (idResident ^ (idResident >>> 32));
+        result = 31 * result + (creId != null ? creId.hashCode() : 0);
+        result = 31 * result + (datedebut != null ? datedebut.hashCode() : 0);
+        result = 31 * result + (ntablette != null ? ntablette.hashCode() : 0);
         result = 31 * result + (dateheurefin != null ? dateheurefin.hashCode() : 0);
         result = 31 * result + (statut != null ? statut.hashCode() : 0);
         result = 31 * result + (etat != null ? etat.hashCode() : 0);

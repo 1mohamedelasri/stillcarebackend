@@ -39,23 +39,6 @@ public class PersonnelController {
                 .orElseThrow(() -> new NotFoundException("personnel with id = "+id));
     }
 
-    @PutMapping("/personnels/{id}")
-    PersonnelEntity replacePersonnel(@RequestBody PersonnelEntity newPersonnel, @PathVariable Long id) {
-
-        return repository.findById(id)
-                .map(obj -> {
-                    obj.setDatedebut(newPersonnel.getDatedebut());
-                    obj.setNtel(newPersonnel.getNtel());
-                    obj.setDatefin(newPersonnel.getDatefin());
-                    obj.setFonction(newPersonnel.getFonction());
-                    return repository.save(obj);
-                })
-                .orElseGet(() -> {
-                    newPersonnel.setIdPersonnel(id);
-                    return repository.save(newPersonnel);
-                });
-    }
-
     @DeleteMapping("/personnels/{id}")
     void deletePersonnel(@PathVariable Long id) {
         repository.deleteById(id);
