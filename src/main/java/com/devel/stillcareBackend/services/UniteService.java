@@ -5,24 +5,25 @@ import com.devel.stillcareBackend.repositories.TabletteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Collection;
 import java.util.List;
 
 @Component
-public class TabletteService {
+public class UniteService {
 
     @Autowired
     private TabletteRepository tabletteRespository;
 
     @Transactional
-    public void add(TabletteEntity tablette) {
-        tabletteRespository.save(tablette);
+    public void add(TabletteEntity unite) {
+        tabletteRespository.save(unite);
     }
 
     @Transactional
-    public void addAll(Collection<TabletteEntity> tablettes) {
-        for (TabletteEntity tablette : tablettes) {
-            tabletteRespository.save(tablette);
+    public void addAll(Collection<TabletteEntity> unites) {
+        for (TabletteEntity unite : unites) {
+            tabletteRespository.save(unite);
         }
     }
 

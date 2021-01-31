@@ -16,8 +16,7 @@ import java.util.Arrays;
 
 @SpringBootApplication
 @Configuration
-@PropertySource("encrypted.properties")
-@EncryptablePropertySource("encrypted.properties")
+@EnableEncryptableProperties
 public class StillcareBackendApplication implements CommandLineRunner {
 
 	@Autowired
