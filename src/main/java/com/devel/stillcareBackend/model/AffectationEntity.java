@@ -11,6 +11,16 @@ public class AffectationEntity {
     private long idResident;
     private Time dateaffectation;
 
+    public AffectationEntity(long idUnite, long idResident, Time dateaffectation) {
+        this.idUnite = idUnite;
+        this.idResident = idResident;
+        this.dateaffectation = dateaffectation;
+    }
+
+    public AffectationEntity() {
+
+    }
+
     @Id
     @Column(name = "ID_UNITE")
     public long getIdUnite() {
