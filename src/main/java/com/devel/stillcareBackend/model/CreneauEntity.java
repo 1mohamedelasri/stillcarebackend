@@ -1,7 +1,7 @@
 package com.devel.stillcareBackend.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name = "CRENEAU", schema = "ELASRIM", catalog = "")
@@ -9,6 +9,7 @@ import java.util.Date;
 public class CreneauEntity {
     private long idPersonnel;
     private Date datedebut;
+    private Long idRdv;
     private String etat;
 
     @Id
@@ -32,6 +33,16 @@ public class CreneauEntity {
     }
 
     @Basic
+    @Column(name = "ID_RDV")
+    public Long getIdRdv() {
+        return idRdv;
+    }
+
+    public void setIdRdv(Long idRdv) {
+        this.idRdv = idRdv;
+    }
+
+    @Basic
     @Column(name = "ETAT")
     public String getEtat() {
         return etat;
@@ -50,6 +61,7 @@ public class CreneauEntity {
 
         if (idPersonnel != that.idPersonnel) return false;
         if (datedebut != null ? !datedebut.equals(that.datedebut) : that.datedebut != null) return false;
+        if (idRdv != null ? !idRdv.equals(that.idRdv) : that.idRdv != null) return false;
         if (etat != null ? !etat.equals(that.etat) : that.etat != null) return false;
 
         return true;
@@ -59,6 +71,7 @@ public class CreneauEntity {
     public int hashCode() {
         int result = (int) (idPersonnel ^ (idPersonnel >>> 32));
         result = 31 * result + (datedebut != null ? datedebut.hashCode() : 0);
+        result = 31 * result + (idRdv != null ? idRdv.hashCode() : 0);
         result = 31 * result + (etat != null ? etat.hashCode() : 0);
         return result;
     }

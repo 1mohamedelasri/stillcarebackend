@@ -1,9 +1,12 @@
 package com.devel.stillcareBackend.repositories;
+import com.devel.stillcareBackend.model.ResidentEntity;
+import com.devel.stillcareBackend.model.TabletteEntity;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-import com.devel.stillcareBackend.model.ResidentEntity;
+import java.util.List;
 
 /**
  * 服务类
@@ -12,5 +15,4 @@ import com.devel.stillcareBackend.model.ResidentEntity;
  */
 @Repository
 public interface ResidentRepository extends JpaRepository<ResidentEntity,Long>{
-
 }

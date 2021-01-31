@@ -1,25 +1,16 @@
 package com.devel.stillcareBackend.model;
 
 import javax.persistence.*;
-import java.sql.Time;
+import java.sql.Date;
 
 @Entity
-@Table(name = "AFFECTATION", schema = "ELASRIM", catalog = "")
-@IdClass(AffectationEntityPK.class)
-public class AffectationEntity {
+@Table(name = "AFFECTATION_RESIDENT", schema = "ELASRIM", catalog = "")
+@IdClass(AffectationResidentEntityPK.class)
+public class AffectationResidentEntity {
     private long idUnite;
     private long idResident;
-    private Time dateaffectation;
-
-    public AffectationEntity(long idUnite, long idResident, Time dateaffectation) {
-        this.idUnite = idUnite;
-        this.idResident = idResident;
-        this.dateaffectation = dateaffectation;
-    }
-
-    public AffectationEntity() {
-
-    }
+    private Date dateaffectation;
+    private Date datefin;
 
     @Id
     @Column(name = "ID_UNITE")
@@ -43,12 +34,22 @@ public class AffectationEntity {
 
     @Basic
     @Column(name = "DATEAFFECTATION")
-    public Time getDateaffectation() {
+    public Date getDateaffectation() {
         return dateaffectation;
     }
 
-    public void setDateaffectation(Time dateaffectation) {
+    public void setDateaffectation(Date dateaffectation) {
         this.dateaffectation = dateaffectation;
+    }
+
+    @Basic
+    @Column(name = "DATEFIN")
+    public Date getDatefin() {
+        return datefin;
+    }
+
+    public void setDatefin(Date datefin) {
+        this.datefin = datefin;
     }
 
     @Override
@@ -56,12 +57,13 @@ public class AffectationEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AffectationEntity that = (AffectationEntity) o;
+        AffectationResidentEntity that = (AffectationResidentEntity) o;
 
         if (idUnite != that.idUnite) return false;
         if (idResident != that.idResident) return false;
         if (dateaffectation != null ? !dateaffectation.equals(that.dateaffectation) : that.dateaffectation != null)
             return false;
+        if (datefin != null ? !datefin.equals(that.datefin) : that.datefin != null) return false;
 
         return true;
     }
@@ -71,6 +73,7 @@ public class AffectationEntity {
         int result = (int) (idUnite ^ (idUnite >>> 32));
         result = 31 * result + (int) (idResident ^ (idResident >>> 32));
         result = 31 * result + (dateaffectation != null ? dateaffectation.hashCode() : 0);
+        result = 31 * result + (datefin != null ? datefin.hashCode() : 0);
         return result;
     }
 }

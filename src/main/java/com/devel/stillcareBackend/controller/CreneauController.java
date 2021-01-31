@@ -6,7 +6,8 @@ import com.devel.stillcareBackend.model.CreneauEntityPK;
 import com.devel.stillcareBackend.repositories.CreneauRepository;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-import java.util.Date;
+
+import java.sql.Date;
 import java.util.List;
 
 @RestController

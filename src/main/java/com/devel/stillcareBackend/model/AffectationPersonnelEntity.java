@@ -1,16 +1,16 @@
 package com.devel.stillcareBackend.model;
 
 import javax.persistence.*;
-import java.sql.Time;
+import java.sql.Date;
 
 @Entity
-@Table(name = "ANCIENAFFECTATION", schema = "ELASRIM", catalog = "")
-@IdClass(AncienaffectationEntityPK.class)
-public class AncienaffectationEntity {
+@Table(name = "AFFECTATION_PERSONNEL", schema = "ELASRIM", catalog = "")
+@IdClass(AffectationPersonnelEntityPK.class)
+public class AffectationPersonnelEntity {
     private long idUnite;
     private long idResident;
-    private Time datedebut;
-    private Time datefin;
+    private Date datedebut;
+    private Date datefin;
 
     @Id
     @Column(name = "ID_UNITE")
@@ -34,21 +34,21 @@ public class AncienaffectationEntity {
 
     @Basic
     @Column(name = "DATEDEBUT")
-    public Time getDatedebut() {
+    public Date getDatedebut() {
         return datedebut;
     }
 
-    public void setDatedebut(Time datedebut) {
+    public void setDatedebut(Date datedebut) {
         this.datedebut = datedebut;
     }
 
     @Basic
     @Column(name = "DATEFIN")
-    public Time getDatefin() {
+    public Date getDatefin() {
         return datefin;
     }
 
-    public void setDatefin(Time datefin) {
+    public void setDatefin(Date datefin) {
         this.datefin = datefin;
     }
 
@@ -57,7 +57,7 @@ public class AncienaffectationEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AncienaffectationEntity that = (AncienaffectationEntity) o;
+        AffectationPersonnelEntity that = (AffectationPersonnelEntity) o;
 
         if (idUnite != that.idUnite) return false;
         if (idResident != that.idResident) return false;

@@ -54,6 +54,7 @@ public class ResidentprocheEntity {
         return true;
     }
 
+
     @Override
     public int hashCode() {
         int result = (int) (idContact ^ (idContact >>> 32));

@@ -1,9 +1,7 @@
 package com.devel.stillcareBackend.repositories;
+import com.devel.stillcareBackend.model.EhpadEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-
-import com.devel.stillcareBackend.model.EphadEntity;
 
 /**
  * 服务类
@@ -11,6 +9,6 @@ import com.devel.stillcareBackend.model.EphadEntity;
  * @since 1.0.0
  */
 @Repository
-public interface EphadRepository extends JpaRepository<EphadEntity,Long>{
+public interface EphadRepository extends JpaRepository<EhpadEntity,Long>{
 
 }

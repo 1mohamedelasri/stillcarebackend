@@ -1,10 +1,8 @@
 package com.devel.stillcareBackend.repositories;
+import com.devel.stillcareBackend.model.InviterdvEntity;
 import com.devel.stillcareBackend.model.InviterdvEntityPK;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-
-import com.devel.stillcareBackend.model.InviterdvEntity;
 
 /**
  * 服务类

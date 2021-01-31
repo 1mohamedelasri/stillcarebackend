@@ -1,5 +1,6 @@
 package com.devel.stillcareBackend.repositories;
-import com.devel.stillcareBackend.model.UniteEntity;
+import com.devel.stillcareBackend.model.AffectationResidentEntity;
+import com.devel.stillcareBackend.model.AffectationResidentEntityPK;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -9,6 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @since 1.0.0
  */
 @Repository
-public interface UniteRepository extends JpaRepository<UniteEntity,Long>{
+public interface AffectationResidentRepository extends JpaRepository<AffectationResidentEntity, AffectationResidentEntityPK>{
 
 }

@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-public class AffectationEntityPK implements Serializable {
+public class AffectationResidentEntityPK implements Serializable {
     private long idUnite;
     private long idResident;
 
@@ -33,7 +33,7 @@ public class AffectationEntityPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AffectationEntityPK that = (AffectationEntityPK) o;
+        AffectationResidentEntityPK that = (AffectationResidentEntityPK) o;
 
         if (idUnite != that.idUnite) return false;
         if (idResident != that.idResident) return false;
