@@ -19,20 +19,20 @@ public class CompteService {
     private ContactRepository contactRepository;
 
     @Autowired
-    private ResidentprocheRepository residentRepository;
+    private ResidentprocheRepository residentprocheRepository;
 
     @Transactional
-    public ResidentprocheEntity SaveContactWithResident(ContactWithResident obj) {
+    public void SaveContactWithResident(ContactWithResident obj) {
         ResidentprocheEntity entity = new ResidentprocheEntity();
         contactRepository.save(obj.getContact());
 
         for (ResidentIds resident: obj.getResidentIds() ) {
+            entity=new ResidentprocheEntity();
             entity.setIdContact(obj.getContact().getIdContact());
             entity.setIdResident(resident.id);
             entity.setLienfamilial(resident.lienFamille);
-            residentRepository.save(entity);
+            residentprocheRepository.save(entity);
         }
-        return entity;
     }
 
 }

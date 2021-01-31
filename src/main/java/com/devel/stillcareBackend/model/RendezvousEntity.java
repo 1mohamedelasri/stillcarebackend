@@ -1,22 +1,22 @@
 package com.devel.stillcareBackend.model;
 
 import javax.persistence.*;
-import java.sql.Time;
+import java.util.Date;
 
 @Entity
-@Table(name = "RENDEZVOUS", schema = "ELASRIM", catalog = "")
+@Table(name = "RENDEZVOUS")
 public class RendezvousEntity {
     private long idRdv;
-    private Long idPersonnel;
+    private Long idRemplacant;
     private long idContact;
     private long idResident;
-    private long creIdPersonnel;
-    private Time datedebut;
-    private Long ntablette;
-    private Time dateheuredebut;
-    private Time dateheurefin;
+    private Date dateCreneau;
+    private Date datedebutRdv;
+    private Long idTablette;
+    private Date datefinRdv;
     private String statut;
     private String etat;
+    private Long idPersonnelcreneau;
 
     @Id
     @Column(name = "ID_RDV")
@@ -29,13 +29,13 @@ public class RendezvousEntity {
     }
 
     @Basic
-    @Column(name = "ID_PERSONNEL")
-    public Long getIdPersonnel() {
-        return idPersonnel;
+    @Column(name = "ID_REMPLACANT")
+    public Long getIdRemplacant() {
+        return idRemplacant;
     }
 
-    public void setIdPersonnel(Long idPersonnel) {
-        this.idPersonnel = idPersonnel;
+    public void setIdRemplacant(Long idRemplacant) {
+        this.idRemplacant = idRemplacant;
     }
 
     @Basic
@@ -59,53 +59,43 @@ public class RendezvousEntity {
     }
 
     @Basic
-    @Column(name = "CRE_ID_PERSONNEL")
-    public long getCreIdPersonnel() {
-        return creIdPersonnel;
+    @Column(name = "DATE_CRENEAU")
+    public Date getDateCreneau() {
+        return dateCreneau;
     }
 
-    public void setCreIdPersonnel(long creIdPersonnel) {
-        this.creIdPersonnel = creIdPersonnel;
-    }
-
-    @Basic
-    @Column(name = "DATEDEBUT")
-    public Time getDatedebut() {
-        return datedebut;
-    }
-
-    public void setDatedebut(Time datedebut) {
-        this.datedebut = datedebut;
+    public void setDateCreneau(Date dateCreneau) {
+        this.dateCreneau = dateCreneau;
     }
 
     @Basic
-    @Column(name = "NTABLETTE")
-    public Long getNtablette() {
-        return ntablette;
+    @Column(name = "DATEDEBUT_RDV")
+    public Date getDatedebutRdv() {
+        return datedebutRdv;
     }
 
-    public void setNtablette(Long ntablette) {
-        this.ntablette = ntablette;
-    }
-
-    @Basic
-    @Column(name = "DATEHEUREDEBUT")
-    public Time getDateheuredebut() {
-        return dateheuredebut;
-    }
-
-    public void setDateheuredebut(Time dateheuredebut) {
-        this.dateheuredebut = dateheuredebut;
+    public void setDatedebutRdv(Date datedebutRdv) {
+        this.datedebutRdv = datedebutRdv;
     }
 
     @Basic
-    @Column(name = "DATEHEUREFIN")
-    public Time getDateheurefin() {
-        return dateheurefin;
+    @Column(name = "ID_TABLETTE")
+    public Long getIdTablette() {
+        return idTablette;
     }
 
-    public void setDateheurefin(Time dateheurefin) {
-        this.dateheurefin = dateheurefin;
+    public void setIdTablette(Long idTablette) {
+        this.idTablette = idTablette;
+    }
+
+    @Basic
+    @Column(name = "DATEFIN_RDV")
+    public Date getDatefinRdv() {
+        return datefinRdv;
+    }
+
+    public void setDatefinRdv(Date datefinRdv) {
+        this.datefinRdv = datefinRdv;
     }
 
     @Basic
@@ -128,6 +118,16 @@ public class RendezvousEntity {
         this.etat = etat;
     }
 
+    @Basic
+    @Column(name = "ID_PERSONNELCRENEAU")
+    public Long getIdPersonnelcreneau() {
+        return idPersonnelcreneau;
+    }
+
+    public void setIdPersonnelcreneau(Long idPersonnelcreneau) {
+        this.idPersonnelcreneau = idPersonnelcreneau;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -138,15 +138,15 @@ public class RendezvousEntity {
         if (idRdv != that.idRdv) return false;
         if (idContact != that.idContact) return false;
         if (idResident != that.idResident) return false;
-        if (creIdPersonnel != that.creIdPersonnel) return false;
-        if (idPersonnel != null ? !idPersonnel.equals(that.idPersonnel) : that.idPersonnel != null) return false;
-        if (datedebut != null ? !datedebut.equals(that.datedebut) : that.datedebut != null) return false;
-        if (ntablette != null ? !ntablette.equals(that.ntablette) : that.ntablette != null) return false;
-        if (dateheuredebut != null ? !dateheuredebut.equals(that.dateheuredebut) : that.dateheuredebut != null)
-            return false;
-        if (dateheurefin != null ? !dateheurefin.equals(that.dateheurefin) : that.dateheurefin != null) return false;
+        if (idRemplacant != null ? !idRemplacant.equals(that.idRemplacant) : that.idRemplacant != null) return false;
+        if (dateCreneau != null ? !dateCreneau.equals(that.dateCreneau) : that.dateCreneau != null) return false;
+        if (datedebutRdv != null ? !datedebutRdv.equals(that.datedebutRdv) : that.datedebutRdv != null) return false;
+        if (idTablette != null ? !idTablette.equals(that.idTablette) : that.idTablette != null) return false;
+        if (datefinRdv != null ? !datefinRdv.equals(that.datefinRdv) : that.datefinRdv != null) return false;
         if (statut != null ? !statut.equals(that.statut) : that.statut != null) return false;
         if (etat != null ? !etat.equals(that.etat) : that.etat != null) return false;
+        if (idPersonnelcreneau != null ? !idPersonnelcreneau.equals(that.idPersonnelcreneau) : that.idPersonnelcreneau != null)
+            return false;
 
         return true;
     }
@@ -154,16 +154,16 @@ public class RendezvousEntity {
     @Override
     public int hashCode() {
         int result = (int) (idRdv ^ (idRdv >>> 32));
-        result = 31 * result + (idPersonnel != null ? idPersonnel.hashCode() : 0);
+        result = 31 * result + (idRemplacant != null ? idRemplacant.hashCode() : 0);
         result = 31 * result + (int) (idContact ^ (idContact >>> 32));
         result = 31 * result + (int) (idResident ^ (idResident >>> 32));
-        result = 31 * result + (int) (creIdPersonnel ^ (creIdPersonnel >>> 32));
-        result = 31 * result + (datedebut != null ? datedebut.hashCode() : 0);
-        result = 31 * result + (ntablette != null ? ntablette.hashCode() : 0);
-        result = 31 * result + (dateheuredebut != null ? dateheuredebut.hashCode() : 0);
-        result = 31 * result + (dateheurefin != null ? dateheurefin.hashCode() : 0);
+        result = 31 * result + (dateCreneau != null ? dateCreneau.hashCode() : 0);
+        result = 31 * result + (datedebutRdv != null ? datedebutRdv.hashCode() : 0);
+        result = 31 * result + (idTablette != null ? idTablette.hashCode() : 0);
+        result = 31 * result + (datefinRdv != null ? datefinRdv.hashCode() : 0);
         result = 31 * result + (statut != null ? statut.hashCode() : 0);
         result = 31 * result + (etat != null ? etat.hashCode() : 0);
+        result = 31 * result + (idPersonnelcreneau != null ? idPersonnelcreneau.hashCode() : 0);
         return result;
     }
 }

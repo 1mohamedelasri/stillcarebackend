@@ -3,7 +3,7 @@ package com.devel.stillcareBackend.model;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 public class CreneauEntityPK implements Serializable {
     private long idPersonnel;

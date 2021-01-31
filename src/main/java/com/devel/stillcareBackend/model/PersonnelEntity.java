@@ -1,10 +1,9 @@
 package com.devel.stillcareBackend.model;
 
 import javax.persistence.*;
-import java.sql.Time;
 
 @Entity
-@Table(name = "PERSONNEL", schema = "ELASRIM", catalog = "")
+@Table(name = "PERSONNEL")
 public class PersonnelEntity {
     private long idPersonnel;
     private String mail;
@@ -13,10 +12,7 @@ public class PersonnelEntity {
     private long idEhpad;
     private String login;
     private String password;
-    private Time datedebut;
-    private Time datefin;
     private String nom;
-    private String personnel;
     private String prenom;
 
     @Id
@@ -90,26 +86,6 @@ public class PersonnelEntity {
     }
 
     @Basic
-    @Column(name = "DATEDEBUT")
-    public Time getDatedebut() {
-        return datedebut;
-    }
-
-    public void setDatedebut(Time datedebut) {
-        this.datedebut = datedebut;
-    }
-
-    @Basic
-    @Column(name = "DATEFIN")
-    public Time getDatefin() {
-        return datefin;
-    }
-
-    public void setDatefin(Time datefin) {
-        this.datefin = datefin;
-    }
-
-    @Basic
     @Column(name = "NOM")
     public String getNom() {
         return nom;
@@ -117,16 +93,6 @@ public class PersonnelEntity {
 
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    @Basic
-    @Column(name = "PERSONNEL")
-    public String getPersonnel() {
-        return personnel;
-    }
-
-    public void setPersonnel(String personnel) {
-        this.personnel = personnel;
     }
 
     @Basic
@@ -153,10 +119,7 @@ public class PersonnelEntity {
         if (ntel != null ? !ntel.equals(that.ntel) : that.ntel != null) return false;
         if (login != null ? !login.equals(that.login) : that.login != null) return false;
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        if (datedebut != null ? !datedebut.equals(that.datedebut) : that.datedebut != null) return false;
-        if (datefin != null ? !datefin.equals(that.datefin) : that.datefin != null) return false;
         if (nom != null ? !nom.equals(that.nom) : that.nom != null) return false;
-        if (personnel != null ? !personnel.equals(that.personnel) : that.personnel != null) return false;
         if (prenom != null ? !prenom.equals(that.prenom) : that.prenom != null) return false;
 
         return true;
@@ -171,10 +134,7 @@ public class PersonnelEntity {
         result = 31 * result + (int) (idEhpad ^ (idEhpad >>> 32));
         result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (datedebut != null ? datedebut.hashCode() : 0);
-        result = 31 * result + (datefin != null ? datefin.hashCode() : 0);
         result = 31 * result + (nom != null ? nom.hashCode() : 0);
-        result = 31 * result + (personnel != null ? personnel.hashCode() : 0);
         result = 31 * result + (prenom != null ? prenom.hashCode() : 0);
         return result;
     }

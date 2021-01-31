@@ -1,18 +1,18 @@
 package com.devel.stillcareBackend.model;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Time;
 
 @Entity
-@Table(name = "RESIDENT", schema = "ELASRIM")
+@Table(name = "RESIDENT")
 public class ResidentEntity {
     private long idResident;
     private long idPersonnel;
-    private Date datenaissance;
+    private Time datenaissance;
     private String statut;
     private String nom;
     private String prenom;
-    private long idEhpad;
+    private Long idUnite;
 
     @Id
     @Column(name = "ID_RESIDENT")
@@ -36,11 +36,11 @@ public class ResidentEntity {
 
     @Basic
     @Column(name = "DATENAISSANCE")
-    public Date getDatenaissance() {
+    public Time getDatenaissance() {
         return datenaissance;
     }
 
-    public void setDatenaissance(Date datenaissance) {
+    public void setDatenaissance(Time datenaissance) {
         this.datenaissance = datenaissance;
     }
 
@@ -75,13 +75,13 @@ public class ResidentEntity {
     }
 
     @Basic
-    @Column(name = "ID_EHPAD")
-    public long getIdEhpad() {
-        return idEhpad;
+    @Column(name = "ID_UNITE")
+    public Long getIdUnite() {
+        return idUnite;
     }
 
-    public void setIdEhpad(long idEhpad) {
-        this.idEhpad = idEhpad;
+    public void setIdUnite(Long idUnite) {
+        this.idUnite = idUnite;
     }
 
     @Override
@@ -93,12 +93,12 @@ public class ResidentEntity {
 
         if (idResident != that.idResident) return false;
         if (idPersonnel != that.idPersonnel) return false;
-        if (idEhpad != that.idEhpad) return false;
         if (datenaissance != null ? !datenaissance.equals(that.datenaissance) : that.datenaissance != null)
             return false;
         if (statut != null ? !statut.equals(that.statut) : that.statut != null) return false;
         if (nom != null ? !nom.equals(that.nom) : that.nom != null) return false;
         if (prenom != null ? !prenom.equals(that.prenom) : that.prenom != null) return false;
+        if (idUnite != null ? !idUnite.equals(that.idUnite) : that.idUnite != null) return false;
 
         return true;
     }
@@ -111,7 +111,7 @@ public class ResidentEntity {
         result = 31 * result + (statut != null ? statut.hashCode() : 0);
         result = 31 * result + (nom != null ? nom.hashCode() : 0);
         result = 31 * result + (prenom != null ? prenom.hashCode() : 0);
-        result = 31 * result + (int) (idEhpad ^ (idEhpad >>> 32));
+        result = 31 * result + (idUnite != null ? idUnite.hashCode() : 0);
         return result;
     }
 }
