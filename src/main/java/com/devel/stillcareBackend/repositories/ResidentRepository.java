@@ -15,4 +15,8 @@ import java.util.List;
  */
 @Repository
 public interface ResidentRepository extends JpaRepository<ResidentEntity,Long>{
+    @Query("select t " +
+            "from ResidentEntity t left join RendezvousEntity r on t.idResident = r.idResident " +
+            "where r.idResident is NULL ")
+    public List<ResidentEntity> listResidentSansRdv();
 }
