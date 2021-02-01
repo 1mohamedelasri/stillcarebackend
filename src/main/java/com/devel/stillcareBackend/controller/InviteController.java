@@ -33,16 +33,16 @@ public class InviteController {
     // Single item
 
     @GetMapping("/invites/{id}")
-    InviteEntity one(@PathVariable Long id) {
+    InviteEntity one(@PathVariable String mail) {
 
-        return repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("invité with id = " +id));
+        return repository.findById(mail)
+                .orElseThrow(() -> new NotFoundException("invité with id = " +mail));
     }
 
     @PutMapping("/invites/{id}")
-    InviteEntity replaceInvite(@RequestBody InviteEntity newInvite, @PathVariable Long id) {
+    InviteEntity replaceInvite(@RequestBody InviteEntity newInvite, @PathVariable String mail) {
 
-        return repository.findById(id)
+        return repository.findById(mail)
                 .map(Invite -> {
                     Invite.setNom(newInvite.getNom());
                     Invite.setMail(newInvite.getMail());
@@ -50,14 +50,14 @@ public class InviteController {
                     return repository.save(Invite);
                 })
                 .orElseGet(() -> {
-                    newInvite.setIdInvite(id);
+                    newInvite.setMail(mail);
                     return repository.save(newInvite);
                 });
     }
 
     @DeleteMapping("/invites/{id}")
-    void deleteInvite(@PathVariable Long id) {
-        repository.deleteById(id);
+    void deleteInvite(@PathVariable String mail) {
+        repository.deleteById(mail);
     }
 
 }

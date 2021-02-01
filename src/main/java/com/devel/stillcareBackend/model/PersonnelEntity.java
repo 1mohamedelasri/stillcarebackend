@@ -3,7 +3,7 @@ package com.devel.stillcareBackend.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "PERSONNEL", catalog = "")
+@Table(name = "PERSONNEL")
 public class PersonnelEntity {
     private long idPersonnel;
     private String mail;
@@ -13,7 +13,6 @@ public class PersonnelEntity {
     private String login;
     private String password;
     private String nom;
-    private String personnel;
     private String prenom;
 
     @Id
@@ -97,16 +96,6 @@ public class PersonnelEntity {
     }
 
     @Basic
-    @Column(name = "PERSONNEL")
-    public String getPersonnel() {
-        return personnel;
-    }
-
-    public void setPersonnel(String personnel) {
-        this.personnel = personnel;
-    }
-
-    @Basic
     @Column(name = "PRENOM")
     public String getPrenom() {
         return prenom;
@@ -131,7 +120,6 @@ public class PersonnelEntity {
         if (login != null ? !login.equals(that.login) : that.login != null) return false;
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
         if (nom != null ? !nom.equals(that.nom) : that.nom != null) return false;
-        if (personnel != null ? !personnel.equals(that.personnel) : that.personnel != null) return false;
         if (prenom != null ? !prenom.equals(that.prenom) : that.prenom != null) return false;
 
         return true;
@@ -147,7 +135,6 @@ public class PersonnelEntity {
         result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (nom != null ? nom.hashCode() : 0);
-        result = 31 * result + (personnel != null ? personnel.hashCode() : 0);
         result = 31 * result + (prenom != null ? prenom.hashCode() : 0);
         return result;
     }

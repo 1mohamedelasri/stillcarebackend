@@ -34,9 +34,9 @@ public class ContactController {
 
     // Single item
     @PostMapping("/contacts")
-    Object newContact(@RequestBody ContactWithResident obj) {
+    void newContact(@RequestBody ContactWithResident obj) {
         if(obj == null) throw new BadParametersException(obj.toString());
-        return compteService.SaveContactWithResident(obj);
+         compteService.SaveContactWithResident(obj);
     }
 
     @GetMapping("/contacts/{id}")
@@ -44,22 +44,6 @@ public class ContactController {
 
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Contact with id = "+ id));
-    }
-
-    @PutMapping("/contacts/{id}")
-    ContactEntity replaceContact(@RequestBody ContactEntity newContact, @PathVariable Long id) {
-
-        return repository.findById(id)
-                .map(Contact -> {
-                    Contact.setNom(newContact.getNom());
-                    Contact.setPrenom(newContact.getPrenom());
-                    Contact.setNumtel(newContact.getNumtel());
-                    return repository.save(Contact);
-                })
-                .orElseGet(() -> {
-                    newContact.setIdContact(id);
-                    return repository.save(newContact);
-                });
     }
 
     @DeleteMapping("/contacts/{id}")

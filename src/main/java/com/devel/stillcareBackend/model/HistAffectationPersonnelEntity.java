@@ -4,12 +4,13 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "AFFECTATION_PERSONNEL")
-@IdClass(AffectationPersonnelEntityPK.class)
-public class AffectationPersonnelEntity {
+@Table(name = "HIST_AFFECTATION_PERSONNEL")
+@IdClass(HistAffectationPersonnelEntityPK.class)
+public class HistAffectationPersonnelEntity {
     private long idUnite;
     private long idPersonnel;
-    private Date dateAffectation;
+    private Date datedebut;
+    private Date datefin;
 
     @Id
     @Column(name = "ID_UNITE")
@@ -32,13 +33,23 @@ public class AffectationPersonnelEntity {
     }
 
     @Basic
-    @Column(name = "DATE_AFFECTATION")
-    public Date getDateAffectation() {
-        return dateAffectation;
+    @Column(name = "DATEDEBUT")
+    public Date getDatedebut() {
+        return datedebut;
     }
 
-    public void setDateAffectation(Date dateAffectation) {
-        this.dateAffectation = dateAffectation;
+    public void setDatedebut(Date datedebut) {
+        this.datedebut = datedebut;
+    }
+
+    @Basic
+    @Column(name = "DATEFIN")
+    public Date getDatefin() {
+        return datefin;
+    }
+
+    public void setDatefin(Date datefin) {
+        this.datefin = datefin;
     }
 
     @Override
@@ -46,12 +57,12 @@ public class AffectationPersonnelEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AffectationPersonnelEntity that = (AffectationPersonnelEntity) o;
+        HistAffectationPersonnelEntity that = (HistAffectationPersonnelEntity) o;
 
         if (idUnite != that.idUnite) return false;
         if (idPersonnel != that.idPersonnel) return false;
-        if (dateAffectation != null ? !dateAffectation.equals(that.dateAffectation) : that.dateAffectation != null)
-            return false;
+        if (datedebut != null ? !datedebut.equals(that.datedebut) : that.datedebut != null) return false;
+        if (datefin != null ? !datefin.equals(that.datefin) : that.datefin != null) return false;
 
         return true;
     }
@@ -60,7 +71,8 @@ public class AffectationPersonnelEntity {
     public int hashCode() {
         int result = (int) (idUnite ^ (idUnite >>> 32));
         result = 31 * result + (int) (idPersonnel ^ (idPersonnel >>> 32));
-        result = 31 * result + (dateAffectation != null ? dateAffectation.hashCode() : 0);
+        result = 31 * result + (datedebut != null ? datedebut.hashCode() : 0);
+        result = 31 * result + (datefin != null ? datefin.hashCode() : 0);
         return result;
     }
 }

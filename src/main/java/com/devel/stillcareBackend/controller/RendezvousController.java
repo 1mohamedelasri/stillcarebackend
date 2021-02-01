@@ -45,12 +45,12 @@ public class RendezvousController {
         return repository.findById(id)
                 .map(rendezvous -> {
                     rendezvous.setEtat(newRendezvous.getEtat());
-                    rendezvous.setDatedebut(newRendezvous.getDatedebut());
-                    rendezvous.setDateheurefin(newRendezvous.getDateheurefin());
+                    rendezvous.setDatedebutRdv(newRendezvous.getDatedebutRdv());
+                    rendezvous.setDatefinRdv(newRendezvous.getDatefinRdv());
                     rendezvous.setStatut(newRendezvous.getStatut());
-                    rendezvous.setCreId(newRendezvous.getCreId());
-                    rendezvous.setIdPersonnel(newRendezvous.getIdPersonnel());
-                    rendezvous.setNtablette(newRendezvous.getNtablette());
+                    rendezvous.setDateCreneau(newRendezvous.getDateCreneau());
+                    rendezvous.setIdPersonnelcreneau(newRendezvous.getIdPersonnelcreneau());
+                    rendezvous.setIdTablette(newRendezvous.getIdTablette());
                     rendezvous.setIdResident(newRendezvous.getIdResident());
                     return repository.save(rendezvous);
                 })

@@ -1,16 +1,15 @@
 package com.devel.stillcareBackend.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import java.io.Serializable;
 
-@Entity
-@Table(name = "INVITE_RDV")
-@IdClass(InviteRdvEntityPK.class)
-public class InviteRdvEntity {
+public class InviteRdvEntityPK implements Serializable {
     private String mailInvite;
     private long idRdv;
 
-    @Id
     @Column(name = "MAIL_INVITE")
+    @Id
     public String getMailInvite() {
         return mailInvite;
     }
@@ -19,8 +18,8 @@ public class InviteRdvEntity {
         this.mailInvite = mailInvite;
     }
 
-    @Id
     @Column(name = "ID_RDV")
+    @Id
     public long getIdRdv() {
         return idRdv;
     }
@@ -34,7 +33,7 @@ public class InviteRdvEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        InviteRdvEntity that = (InviteRdvEntity) o;
+        InviteRdvEntityPK that = (InviteRdvEntityPK) o;
 
         if (idRdv != that.idRdv) return false;
         if (mailInvite != null ? !mailInvite.equals(that.mailInvite) : that.mailInvite != null) return false;

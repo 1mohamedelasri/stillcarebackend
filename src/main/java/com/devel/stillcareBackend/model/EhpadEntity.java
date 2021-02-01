@@ -3,7 +3,7 @@ package com.devel.stillcareBackend.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "EHPAD", catalog = "")
+@Table(name = "EHPAD")
 public class EhpadEntity {
     private long idEhpad;
     private String nom;

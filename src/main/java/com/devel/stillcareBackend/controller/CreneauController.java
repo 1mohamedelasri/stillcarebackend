@@ -7,7 +7,7 @@ import com.devel.stillcareBackend.repositories.CreneauRepository;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -58,9 +58,12 @@ public class CreneauController {
         creneauPK.setDatedebut(localDate);
 
         return repository.findById(creneauPK)
-                .map(Creneau -> {
-                    Creneau.setEtat(newCreneau.getEtat());
-                    return repository.save(Creneau);
+                .map(creneau -> {
+                    creneau.setIdPersonnel(newCreneau.getIdPersonnel());
+                    creneau.setDatedebut(newCreneau.getDatedebut());
+                    creneau.setEtat(newCreneau.getEtat());
+
+                    return repository.save(creneau);
                 })
                 .orElseGet(() -> {
                     newCreneau.setDatedebut(localDate);

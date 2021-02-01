@@ -3,22 +3,11 @@ package com.devel.stillcareBackend.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "INVITE", catalog = "")
+@Table(name = "INVITE")
 public class InviteEntity {
-    private long idInvite;
     private String nom;
     private String prenom;
     private String mail;
-
-    @Id
-    @Column(name = "ID_INVITE")
-    public long getIdInvite() {
-        return idInvite;
-    }
-
-    public void setIdInvite(long idInvite) {
-        this.idInvite = idInvite;
-    }
 
     @Basic
     @Column(name = "NOM")
@@ -40,7 +29,7 @@ public class InviteEntity {
         this.prenom = prenom;
     }
 
-    @Basic
+    @Id
     @Column(name = "MAIL")
     public String getMail() {
         return mail;
@@ -57,7 +46,6 @@ public class InviteEntity {
 
         InviteEntity that = (InviteEntity) o;
 
-        if (idInvite != that.idInvite) return false;
         if (nom != null ? !nom.equals(that.nom) : that.nom != null) return false;
         if (prenom != null ? !prenom.equals(that.prenom) : that.prenom != null) return false;
         if (mail != null ? !mail.equals(that.mail) : that.mail != null) return false;
@@ -67,8 +55,7 @@ public class InviteEntity {
 
     @Override
     public int hashCode() {
-        int result = (int) (idInvite ^ (idInvite >>> 32));
-        result = 31 * result + (nom != null ? nom.hashCode() : 0);
+        int result = nom != null ? nom.hashCode() : 0;
         result = 31 * result + (prenom != null ? prenom.hashCode() : 0);
         result = 31 * result + (mail != null ? mail.hashCode() : 0);
         return result;
