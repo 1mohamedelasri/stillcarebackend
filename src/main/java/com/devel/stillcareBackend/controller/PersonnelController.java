@@ -2,6 +2,7 @@ package com.devel.stillcareBackend.controller;
 
 import com.devel.stillcareBackend.exception.exceptionmodels.NotFoundException;
 import com.devel.stillcareBackend.model.PersonnelEntity;
+import com.devel.stillcareBackend.model.ResidentEntity;
 import com.devel.stillcareBackend.repositories.PersonnelRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,5 +44,10 @@ public class PersonnelController {
     void deletePersonnel(@PathVariable Long id) {
         repository.deleteById(id);
     }
+
+    @GetMapping("/personnels/ehpad/{id}")
+    List<PersonnelEntity> listPersonnelsEhpad(@PathVariable Long id){
+        return repository.listPersonnelEhpad(id);
+    };
 
 }

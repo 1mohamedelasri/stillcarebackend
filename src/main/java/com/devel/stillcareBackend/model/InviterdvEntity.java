@@ -3,7 +3,7 @@ package com.devel.stillcareBackend.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "INVITERDV", schema = "ELASRIM", catalog = "")
+@Table(name = "INVITERDV", catalog = "")
 @IdClass(InviterdvEntityPK.class)
 public class InviterdvEntity {
     private long idRdv;

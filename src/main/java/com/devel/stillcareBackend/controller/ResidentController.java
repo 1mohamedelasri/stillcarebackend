@@ -65,4 +65,9 @@ public class ResidentController {
         repository.deleteById(id);
     }
 
+    @GetMapping("/Residents/ehpad/{id}")
+    List<ResidentEntity> listResidentEhpad(@PathVariable Long id){
+     return repository.listResidentEhpad(id);
+    };
+
 }

@@ -65,4 +65,8 @@ public class RendezvousController {
         repository.deleteById(id);
     }
 
+    @GetMapping("/Rendezvous/personnel/{id}")
+    List<RendezvousEntity> getRdvByPersonnel(@PathVariable long id){
+        return repository.rdvByPersonnelid(id);
+    }
 }
