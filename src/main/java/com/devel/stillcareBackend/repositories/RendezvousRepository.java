@@ -1,16 +1,17 @@
 package com.devel.stillcareBackend.repositories;
+import com.devel.stillcareBackend.model.RendezvousEntity;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-import com.devel.stillcareBackend.model.RendezvousEntity;
-
-/**
- * 服务类
- * @author 刘前进 xindong888@163.com  www.xjke.com
- * @since 1.0.0
- */
+import java.util.List;
 @Repository
 public interface RendezvousRepository extends JpaRepository<RendezvousEntity,Long>{
+    @Query("select t from RendezvousEntity t where t.idPersonnelcreneau = :id")
+    public List<RendezvousEntity> rdvByPersonnelid(@Param("id") long id);
+
+    @Query("select t from RendezvousEntity t where t.idResident = :id")
+    public List<RendezvousEntity> rdvByCreneauid(@Param("id") long id);
 
 }

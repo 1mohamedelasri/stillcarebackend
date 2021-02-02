@@ -6,6 +6,7 @@ import com.devel.stillcareBackend.model.CreneauEntityPK;
 import com.devel.stillcareBackend.repositories.CreneauRepository;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Date;
 import java.util.List;
 
@@ -57,9 +58,12 @@ public class CreneauController {
         creneauPK.setDatedebut(localDate);
 
         return repository.findById(creneauPK)
-                .map(Creneau -> {
-                    Creneau.setEtat(newCreneau.getEtat());
-                    return repository.save(Creneau);
+                .map(creneau -> {
+                    creneau.setIdPersonnel(newCreneau.getIdPersonnel());
+                    creneau.setDatedebut(newCreneau.getDatedebut());
+                    creneau.setEtat(newCreneau.getEtat());
+
+                    return repository.save(creneau);
                 })
                 .orElseGet(() -> {
                     newCreneau.setDatedebut(localDate);
@@ -77,6 +81,12 @@ public class CreneauController {
         creneauPK.setDatedebut(localDate);
 
         repository.deleteById(creneauPK);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/creneaux/personnel/sansRdv/{id}")
+    List<CreneauEntity> getCreneauByPersonnel(@PathVariable Long id) {
+        return repository.CreneauSansRdv(id);
     }
 
 }

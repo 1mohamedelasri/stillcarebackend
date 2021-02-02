@@ -1,7 +1,7 @@
 package com.devel.stillcareBackend.controller;
 
 import com.devel.stillcareBackend.exception.exceptionmodels.NotFoundException;
-import com.devel.stillcareBackend.model.EphadEntity;
+import com.devel.stillcareBackend.model.EhpadEntity;
 import com.devel.stillcareBackend.repositories.EphadRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,28 +19,28 @@ public class EphadController {
 
     // Aggregate root
     // tag::get-aggregate-root[]
-    @GetMapping("/ephads")
-    List<EphadEntity> all() {
+    @GetMapping("/ehpads")
+    List<EhpadEntity> all() {
         return repository.findAll();
     }
     // end::get-aggregate-root[]
 
-    @PostMapping("/ephads")
-    EphadEntity newEphad(@RequestBody EphadEntity newEphad) {
+    @PostMapping("/ehpads")
+    EhpadEntity newEphad(@RequestBody EhpadEntity newEphad) {
         return repository.save(newEphad);
     }
 
     // Single item
 
-    @GetMapping("/ephads/{id}")
-    EphadEntity one(@PathVariable Long id) {
+    @GetMapping("/ehpads/{id}")
+    EhpadEntity one(@PathVariable Long id) {
 
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Ephad with "+ id));
     }
 
-    @PutMapping("/ephads/{id}")
-    EphadEntity replaceEphad(@RequestBody EphadEntity newEphad, @PathVariable Long id) {
+    @PutMapping("/ehpads/{id}")
+    EhpadEntity replaceEphad(@RequestBody EhpadEntity newEphad, @PathVariable Long id) {
 
         return repository.findById(id)
                 .map(Ephad -> {
@@ -48,12 +48,12 @@ public class EphadController {
                     return repository.save(Ephad);
                 })
                 .orElseGet(() -> {
-                    newEphad.setIdEphad(id);
+                    newEphad.setIdEhpad(id);
                     return repository.save(newEphad);
                 });
     }
 
-    @DeleteMapping("/ephads/{id}")
+    @DeleteMapping("/ehpads/{id}")
     void deleteEphad(@PathVariable Long id) {
         repository.deleteById(id);
     }

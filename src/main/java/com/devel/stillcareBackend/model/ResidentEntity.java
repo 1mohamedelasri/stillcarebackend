@@ -1,14 +1,18 @@
 package com.devel.stillcareBackend.model;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Time;
 
 @Entity
-@Table(name = "RESIDENT", schema = "ELASRIM", catalog = "")
+@Table(name = "RESIDENT")
 public class ResidentEntity {
     private long idResident;
-    private Date datenaissance;
+    private long idPersonnel;
+    private Time datenaissance;
     private String statut;
+    private String nom;
+    private String prenom;
+    private Long idUnite;
 
     @Id
     @Column(name = "ID_RESIDENT")
@@ -21,12 +25,22 @@ public class ResidentEntity {
     }
 
     @Basic
+    @Column(name = "ID_PERSONNEL")
+    public long getIdPersonnel() {
+        return idPersonnel;
+    }
+
+    public void setIdPersonnel(long idPersonnel) {
+        this.idPersonnel = idPersonnel;
+    }
+
+    @Basic
     @Column(name = "DATENAISSANCE")
-    public Date getDatenaissance() {
+    public Time getDatenaissance() {
         return datenaissance;
     }
 
-    public void setDatenaissance(Date datenaissance) {
+    public void setDatenaissance(Time datenaissance) {
         this.datenaissance = datenaissance;
     }
 
@@ -40,6 +54,36 @@ public class ResidentEntity {
         this.statut = statut;
     }
 
+    @Basic
+    @Column(name = "NOM")
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    @Basic
+    @Column(name = "PRENOM")
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    @Basic
+    @Column(name = "ID_UNITE")
+    public Long getIdUnite() {
+        return idUnite;
+    }
+
+    public void setIdUnite(Long idUnite) {
+        this.idUnite = idUnite;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,9 +92,13 @@ public class ResidentEntity {
         ResidentEntity that = (ResidentEntity) o;
 
         if (idResident != that.idResident) return false;
+        if (idPersonnel != that.idPersonnel) return false;
         if (datenaissance != null ? !datenaissance.equals(that.datenaissance) : that.datenaissance != null)
             return false;
         if (statut != null ? !statut.equals(that.statut) : that.statut != null) return false;
+        if (nom != null ? !nom.equals(that.nom) : that.nom != null) return false;
+        if (prenom != null ? !prenom.equals(that.prenom) : that.prenom != null) return false;
+        if (idUnite != null ? !idUnite.equals(that.idUnite) : that.idUnite != null) return false;
 
         return true;
     }
@@ -58,8 +106,12 @@ public class ResidentEntity {
     @Override
     public int hashCode() {
         int result = (int) (idResident ^ (idResident >>> 32));
+        result = 31 * result + (int) (idPersonnel ^ (idPersonnel >>> 32));
         result = 31 * result + (datenaissance != null ? datenaissance.hashCode() : 0);
         result = 31 * result + (statut != null ? statut.hashCode() : 0);
+        result = 31 * result + (nom != null ? nom.hashCode() : 0);
+        result = 31 * result + (prenom != null ? prenom.hashCode() : 0);
+        result = 31 * result + (idUnite != null ? idUnite.hashCode() : 0);
         return result;
     }
 }

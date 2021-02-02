@@ -1,7 +1,6 @@
 package com.devel.stillcareBackend.services;
 
 
-import com.devel.stillcareBackend.model.ContactEntity;
 import com.devel.stillcareBackend.model.InviteEntity;
 import com.devel.stillcareBackend.repositories.InviteRepository;
 import org.springframework.beans.factory.annotation.Autowired;

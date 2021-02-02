@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 public class ResidentController {
 
@@ -39,6 +40,12 @@ public class ResidentController {
                 .orElseThrow(() -> new NotFoundException("Resident avec id = " +id));
     }
 
+    @GetMapping("/Residents/noAppointment")
+    List<ResidentEntity> ResidentSandRdv() {
+
+        return repository.listResidentSansRdv();
+    }
+
     @PutMapping("/Residents/{id}")
     ResidentEntity replaceResident(@RequestBody ResidentEntity newResident, @PathVariable Long id) {
 
@@ -58,5 +65,11 @@ public class ResidentController {
     void deleteResident(@PathVariable Long id) {
         repository.deleteById(id);
     }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/Residents/ehpad/{id}")
+    List<ResidentEntity> listResidentEhpad(@PathVariable Long id){
+     return repository.listResidentEhpad(id);
+    };
 
 }

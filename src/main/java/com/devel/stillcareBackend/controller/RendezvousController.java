@@ -43,12 +43,16 @@ public class RendezvousController {
     RendezvousEntity replaceRendezvous(@RequestBody RendezvousEntity newRendezvous, @PathVariable Long id) {
 
         return repository.findById(id)
-                .map(Rendezvous -> {
-                    Rendezvous.setEtat(newRendezvous.getEtat());
-                    Rendezvous.setDateheuredebut(newRendezvous.getDateheuredebut());
-                    Rendezvous.setDateheurefin(newRendezvous.getDateheurefin());
-                    Rendezvous.setStatut(newRendezvous.getStatut());
-                    return repository.save(Rendezvous);
+                .map(rendezvous -> {
+                    rendezvous.setEtat(newRendezvous.getEtat());
+                    rendezvous.setDatedebutRdv(newRendezvous.getDatedebutRdv());
+                    rendezvous.setDatefinRdv(newRendezvous.getDatefinRdv());
+                    rendezvous.setStatut(newRendezvous.getStatut());
+                    rendezvous.setDateCreneau(newRendezvous.getDateCreneau());
+                    rendezvous.setIdPersonnelcreneau(newRendezvous.getIdPersonnelcreneau());
+                    rendezvous.setIdTablette(newRendezvous.getIdTablette());
+                    rendezvous.setIdResident(newRendezvous.getIdResident());
+                    return repository.save(rendezvous);
                 })
                 .orElseGet(() -> {
                     newRendezvous.setIdRdv(id);
@@ -61,4 +65,15 @@ public class RendezvousController {
         repository.deleteById(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/Rendezvous/personnel/{id}")
+    List<RendezvousEntity> getRdvByPersonnel(@PathVariable long id){
+        return repository.rdvByPersonnelid(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/Rendezvous/resident/{id}")
+    List<RendezvousEntity> getRdvByCreneau(@PathVariable long id){
+        return repository.rdvByCreneauid(id);
+    }
 }
