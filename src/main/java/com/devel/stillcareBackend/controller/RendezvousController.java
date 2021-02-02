@@ -65,4 +65,15 @@ public class RendezvousController {
         repository.deleteById(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/Rendezvous/personnel/{id}")
+    List<RendezvousEntity> getRdvByPersonnel(@PathVariable long id){
+        return repository.rdvByPersonnelid(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/Rendezvous/resident/{id}")
+    List<RendezvousEntity> getRdvByCreneau(@PathVariable long id){
+        return repository.rdvByCreneauid(id);
+    }
 }
