@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 public class ResidentController {
 
@@ -65,6 +66,7 @@ public class ResidentController {
         repository.deleteById(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/Residents/ehpad/{id}")
     List<ResidentEntity> listResidentEhpad(@PathVariable Long id){
      return repository.listResidentEhpad(id);

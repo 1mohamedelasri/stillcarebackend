@@ -8,7 +8,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 @Repository
 public interface RendezvousRepository extends JpaRepository<RendezvousEntity,Long>{
-    @Query("select t from RendezvousEntity t where t.idPersonnel = :id")
+    @Query("select t from RendezvousEntity t where t.idPersonnelcreneau = :id")
     public List<RendezvousEntity> rdvByPersonnelid(@Param("id") long id);
+
+    @Query("select t from RendezvousEntity t where t.idResident = :id")
+    public List<RendezvousEntity> rdvByCreneauid(@Param("id") long id);
 
 }

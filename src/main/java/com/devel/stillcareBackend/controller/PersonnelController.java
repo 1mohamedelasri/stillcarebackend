@@ -45,6 +45,7 @@ public class PersonnelController {
         repository.deleteById(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/personnels/ehpad/{id}")
     List<PersonnelEntity> listPersonnelsEhpad(@PathVariable Long id){
         return repository.listPersonnelEhpad(id);

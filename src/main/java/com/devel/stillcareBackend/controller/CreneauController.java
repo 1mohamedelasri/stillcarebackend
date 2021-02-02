@@ -83,7 +83,8 @@ public class CreneauController {
         repository.deleteById(creneauPK);
     }
 
-    @GetMapping("/creneaux/personnel/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/creneaux/personnel/sansRdv/{id}")
     List<CreneauEntity> getCreneauByPersonnel(@PathVariable Long id) {
         return repository.CreneauSansRdv(id);
     }

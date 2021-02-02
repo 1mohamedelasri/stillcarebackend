@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 @Repository
 public interface CreneauRepository extends JpaRepository<CreneauEntity, CreneauEntityPK>{
-    @Query("select t from CreneauEntity t where t.idPersonnel=:id and t.datedebut not in (select datedebut from RendezvousEntity where idPersonnel = :id)")
+    @Query("select t from CreneauEntity t where t.idPersonnel=:id and t.datedebut not in (select dateCreneau from RendezvousEntity where idPersonnelcreneau = :id)")
     public List<CreneauEntity> CreneauSansRdv(@Param("id") Long id);
 
 }
