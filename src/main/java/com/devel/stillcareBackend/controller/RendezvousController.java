@@ -74,6 +74,6 @@ public class RendezvousController {
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/Rendezvous/resident/{id}")
     List<RendezvousEntity> getRdvByCreneau(@PathVariable long id){
-        return repository.rdvByCreneauid(id);
+        return repository.rdvByResidentid(id);
     }
 }

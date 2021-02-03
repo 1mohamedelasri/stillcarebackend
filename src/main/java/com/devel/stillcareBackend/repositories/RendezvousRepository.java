@@ -12,6 +12,6 @@ public interface RendezvousRepository extends JpaRepository<RendezvousEntity,Lon
     public List<RendezvousEntity> rdvByPersonnelid(@Param("id") long id);
 
     @Query("select t from RendezvousEntity t where t.idResident = :id")
-    public List<RendezvousEntity> rdvByCreneauid(@Param("id") long id);
+    public List<RendezvousEntity> rdvByResidentid(@Param("id") long id);
 
 }
