@@ -32,10 +32,9 @@ public class ResidentController {
     }
 
     @GetMapping("/residents")
-    List<ResidentEntity> all() {
-        return repository.findAll();
+    Page<ResidentEntity> findAll(@RequestParam Optional<Integer> page, @RequestParam Optional<Integer> limit, @) {
+        return repository.findAllByPage(PageRequest.of(page.orElse(0),limit.orElse(0)));
     }
-
 
 
     @PostMapping("/residents")
