@@ -51,7 +51,7 @@ public class ResidentController {
 
     @GetMapping("/residents/{nom}/{prenom}")
     ResidentEntity findByName(@PathVariable String nom, @PathVariable String prenom) {
-        if(nom.isEmpty() && prenom.isEmpty()){
+        if(nom.isEmpty() || prenom.isEmpty()){
             throw new BadParametersException("nom : "+ nom + "prenom"+ prenom);
         }
         return repository.findByName(nom.trim(),prenom.trim())

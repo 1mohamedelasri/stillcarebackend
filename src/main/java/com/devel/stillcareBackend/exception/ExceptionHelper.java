@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.*;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.sql.SQLException;
 
@@ -75,6 +76,14 @@ public class ExceptionHelper {
         @ExceptionHandler(NotSavedException.class)
         @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
         String handleSQLException(NotSavedException ex) {
+                logger.error(" Exception: ",ex.getMessage());
+                return ex.getMessage();
+        }
+
+        @ResponseBody
+        @ExceptionHandler(NoHandlerFoundException.class)
+        @ResponseStatus(HttpStatus.BAD_REQUEST)
+        String noHandlerFoundException(NoHandlerFoundException ex) {
                 logger.error(" Exception: ",ex.getMessage());
                 return ex.getMessage();
         }
