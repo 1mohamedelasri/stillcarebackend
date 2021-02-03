@@ -17,4 +17,8 @@ public interface PersonnelRepository extends JpaRepository<PersonnelEntity,Long>
 
     @Query("select p from AffectationPersonnelEntity t join  PersonnelEntity p on(t.idPersonnel = p.idPersonnel) where t.idUnite = :id_unite")
     public Optional<List<PersonnelEntity>> findPersonnelByUnite(@Param("id_unite") long id_unite);
+
+    @Query("select p from AffectationPersonnelEntity t join  PersonnelEntity p on(t.idUnite = :id_unite and p.idEhpad = :id_ehpad and t.idPersonnel = p.idPersonnel)  ")
+    public Optional<List<PersonnelEntity>> findPersonnelByUniteAndEhpad(@Param("id_unite") long id_unite, @Param("id_ehpad") long id_ehpad);
+
 }

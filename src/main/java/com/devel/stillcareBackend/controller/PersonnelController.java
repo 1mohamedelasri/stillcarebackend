@@ -57,4 +57,12 @@ public class PersonnelController {
         return repository.findPersonnelByUnite(id).orElseThrow(() -> new NotFoundException("No Personnels found for unite"+id));
     };
 
+    @GetMapping("/personnels/ehpad/{id_ehpad}/unite/{id_unite}")
+    List<PersonnelEntity> findPersonnelByUniteAndEhpad(@PathVariable Long id_ehpad,@PathVariable Long id_unite ){
+        return repository.findPersonnelByUniteAndEhpad(id_unite,id_ehpad).orElseThrow(() -> new NotFoundException("No Personnels found for unite"+id_unite+ "of  ehpad" + id_ehpad));
+    };
+
+
+
+
 }
