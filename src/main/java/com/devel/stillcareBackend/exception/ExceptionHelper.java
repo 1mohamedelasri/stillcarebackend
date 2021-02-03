@@ -2,6 +2,7 @@ package com.devel.stillcareBackend.exception;
 
 import com.devel.stillcareBackend.exception.exceptionmodels.BadParametersException;
 import com.devel.stillcareBackend.exception.exceptionmodels.NotFoundException;
+import com.devel.stillcareBackend.exception.exceptionmodels.NotSavedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -67,6 +68,14 @@ public class ExceptionHelper {
         @ResponseStatus(HttpStatus.BAD_REQUEST)
         String handleSQLException(SQLException ex) {
                 logger.error("Unauthorized Exception: ",ex.getMessage());
+                return ex.getMessage();
+        }
+
+        @ResponseBody
+        @ExceptionHandler(NotSavedException.class)
+        @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
+        String handleSQLException(NotSavedException ex) {
+                logger.error(" Exception: ",ex.getMessage());
                 return ex.getMessage();
         }
 

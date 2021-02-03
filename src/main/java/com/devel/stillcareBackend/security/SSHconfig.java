@@ -13,14 +13,16 @@ import com.jcraft.jsch.Session;
 import java.io.IOException;
 import java.util.Properties;
 
-
 @Component
 public class SSHconfig implements ServletContextInitializer {
     Logger log = LoggerFactory.getLogger(SSHconfig.class);
+    private final SecretKey config;
 
 
-    public SSHconfig() {
+    public SSHconfig(SecretKey config) {
+        this.config = config;
         try {
+            log.info("Openning an SSH Tunneel ......");
             Properties p = new Properties();
             p.load(getClass().getResourceAsStream("/application.properties"));
             if(p.getProperty("ssh.forward.enabled")!=null){
@@ -28,7 +30,7 @@ public class SSHconfig implements ServletContextInitializer {
                 log.info("ssh init ……");
                 Session session = new JSch().getSession(p.getProperty("ssh.forward.username"),p.getProperty("ssh.forward.host"),Integer.valueOf(p.getProperty("ssh.forward.port")));
                 session.setConfig("StrictHostKeyChecking", "no");
-                session.setPassword(p.getProperty("ssh.forward.password"));
+                session.setPassword(config.getSSHConfigKey());
                 session.connect();
                 session.setPortForwardingL(p.getProperty("ssh.forward.from_host"),Integer.valueOf(p.getProperty("ssh.forward.from_port")) ,p.getProperty("ssh.forward.to_host") ,Integer.valueOf(p.getProperty("ssh.forward.to_port")) );
             }else{

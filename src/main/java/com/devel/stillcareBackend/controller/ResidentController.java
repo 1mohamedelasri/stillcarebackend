@@ -1,9 +1,14 @@
 package com.devel.stillcareBackend.controller;
 
+import com.devel.stillcareBackend.exception.ExceptionHelper;
 import com.devel.stillcareBackend.exception.exceptionmodels.BadParametersException;
 import com.devel.stillcareBackend.exception.exceptionmodels.NotFoundException;
+import com.devel.stillcareBackend.exception.exceptionmodels.NotSavedException;
 import com.devel.stillcareBackend.model.ResidentEntity;
 import com.devel.stillcareBackend.repositories.ResidentRepository;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +16,7 @@ import java.util.List;
 
 @RestController
 public class ResidentController {
+    private static final Logger logger = LoggerFactory.getLogger(ExceptionHelper.class);
 
     private final ResidentRepository repository;
 
@@ -29,7 +35,9 @@ public class ResidentController {
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/residents")
     ResidentEntity newResident(@RequestBody ResidentEntity newResident) {
-        return repository.save(newResident);
+        var obj =  repository.save(newResident);
+        if(obj == null) new BadParametersException("le resident "+ newResident.toString());
+        return  obj;
     }
 
     // Single item
@@ -41,7 +49,6 @@ public class ResidentController {
                 .orElseThrow(() -> new NotFoundException("Resident avec id = " +id));
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/residents/{nom}/{prenom}")
     ResidentEntity findByName(@PathVariable String nom, @PathVariable String prenom) {
         if(nom.isEmpty() && prenom.isEmpty()){
