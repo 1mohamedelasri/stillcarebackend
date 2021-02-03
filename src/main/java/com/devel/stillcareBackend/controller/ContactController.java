@@ -51,6 +51,11 @@ public class ContactController {
         repository.deleteById(id);
     }
 
-
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/contacts/athentication/{token}")
+    ContactEntity authenticateContact(@PathVariable String token) {
+        return repository.authenticateContact(token)
+                .orElseThrow(() -> new NotFoundException("Contact with token = "+ token));
+    }
 
 }
