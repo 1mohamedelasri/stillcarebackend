@@ -43,11 +43,13 @@ public class PersonnelController {
 
 
 
-    @GetMapping("/personnels/{id}")
-    PersonnelEntity one(@PathVariable Long id) {
 
-        return repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("personnel with id = "+id));
+
+    @GetMapping("/personnels/ehpad/{id_ehpad}")
+    PersonnelEntity one(@PathVariable Long id_ehpad) {
+
+        return repository.findById(id_ehpad)
+                .orElseThrow(() -> new NotFoundException("personnel with id = "+id_ehpad));
     }
 
     @DeleteMapping("/personnels/{id}")
@@ -58,7 +60,7 @@ public class PersonnelController {
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/personnels/ehpad/{id}")
     List<PersonnelEntity> listPersonnelsEhpad(@PathVariable Long id){
-        return repository.listPersonnelEhpad(id);
+        return repository.listPersonnelEhpad(id).orElseThrow(() -> new NotFoundException("No Personnels found for ephads"+id));
     };
 
 }

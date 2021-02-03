@@ -49,6 +49,7 @@ public class ExceptionHelper {
         @ExceptionHandler(NotFoundException.class)
         @ResponseStatus(HttpStatus.NOT_FOUND)
         String employeeNotFoundHandler(NotFoundException ex) {
+                logger.error("Exception: ",ex.getMessage());
                 return ex.getMessage();
         }
 

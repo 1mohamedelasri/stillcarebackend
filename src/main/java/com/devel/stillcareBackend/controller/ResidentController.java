@@ -1,5 +1,6 @@
 package com.devel.stillcareBackend.controller;
 
+import com.devel.stillcareBackend.exception.exceptionmodels.BadParametersException;
 import com.devel.stillcareBackend.exception.exceptionmodels.NotFoundException;
 import com.devel.stillcareBackend.model.ResidentEntity;
 import com.devel.stillcareBackend.repositories.ResidentRepository;
@@ -20,33 +21,43 @@ public class ResidentController {
 
     // Aggregate root
     // tag::get-aggregate-root[]
-    @GetMapping("/Residents")
+    @GetMapping("/residents")
     List<ResidentEntity> all() {
         return repository.findAll();
     }
     // end::get-aggregate-root[]
-
-    @PostMapping("/Residents")
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/residents")
     ResidentEntity newResident(@RequestBody ResidentEntity newResident) {
         return repository.save(newResident);
     }
 
     // Single item
 
-    @GetMapping("/Residents/{id}")
+    @GetMapping("/residents/{id}")
     ResidentEntity one(@PathVariable Long id) {
 
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Resident avec id = " +id));
     }
 
-    @GetMapping("/Residents/noAppointment")
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/residents/{nom}/{prenom}")
+    ResidentEntity findByName(@PathVariable String nom, @PathVariable String prenom) {
+        if(nom.isEmpty() && prenom.isEmpty()){
+            throw new BadParametersException("nom : "+ nom + "prenom"+ prenom);
+        }
+        return repository.findByName(nom.trim(),prenom.trim())
+                .orElseThrow(() -> new NotFoundException("Resident avec nom = " +nom+ "et prenom"+ prenom));
+    }
+
+    @GetMapping("/residents/noAppointment")
     List<ResidentEntity> ResidentSandRdv() {
 
         return repository.listResidentSansRdv();
     }
 
-    @PutMapping("/Residents/{id}")
+    @PutMapping("/residents/{id}")
     ResidentEntity replaceResident(@RequestBody ResidentEntity newResident, @PathVariable Long id) {
 
         return repository.findById(id)
@@ -61,13 +72,13 @@ public class ResidentController {
                 });
     }
 
-    @DeleteMapping("/Residents/{id}")
+    @DeleteMapping("/residents/{id}")
     void deleteResident(@PathVariable Long id) {
         repository.deleteById(id);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/Residents/ehpad/{id}")
+    @GetMapping("/residents/ehpad/{id}")
     List<ResidentEntity> listResidentEhpad(@PathVariable Long id){
      return repository.listResidentEhpad(id);
     };
