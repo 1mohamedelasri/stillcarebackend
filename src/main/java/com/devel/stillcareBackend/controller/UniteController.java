@@ -19,27 +19,40 @@ public class UniteController {
 
     // Aggregate root
     // tag::get-aggregate-root[]
-    @GetMapping("/Unites")
+    @GetMapping("/unites")
     List<UniteEntity> all() {
         return repository.findAll();
     }
     // end::get-aggregate-root[]
 
-    @PostMapping("/Unites")
+    @PostMapping("/unites")
     UniteEntity newUnitee(@RequestBody UniteEntity newUnite) {
         return repository.save(newUnite);
     }
 
     // Single item
 
-    @GetMapping("/Unites/{id}")
+    @GetMapping("/unites/{id}")
     UniteEntity one(@PathVariable Long id) {
 
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Unite with id= "+ id));
     }
 
-    @PutMapping("/Unites/{id}")
+    @GetMapping("/unites/ehpad/{id}")
+    List<UniteEntity> findUnitesByEhpad(@PathVariable Long id) {
+
+        return repository.findUnitesByEhpad(id)
+                .orElseThrow(() -> new NotFoundException("Unite with id= "+ id));
+    }
+
+    @GetMapping("/unites/{resident}/ehpad/{idephad}")
+    List<UniteEntity> findOtherUniteOfResidentByEphad(@PathVariable Long resident, @PathVariable Long idephad) {
+        return repository.findOtherUniteOfResidentByEphad(idephad,resident)
+                .orElseThrow(() -> new NotFoundException("Unite with idphad = "+ idephad));
+    }
+
+    @PutMapping("/unites/{id}")
     UniteEntity replaceUnitee(@RequestBody UniteEntity newUnite, @PathVariable Long id) {
 
         return repository.findById(id)
@@ -54,7 +67,7 @@ public class UniteController {
                 });
     }
 
-    @DeleteMapping("/Unites/{id}")
+    @DeleteMapping("/unites/{id}")
     void deleteUnitee(@PathVariable Long id) {
         repository.deleteById(id);
     }

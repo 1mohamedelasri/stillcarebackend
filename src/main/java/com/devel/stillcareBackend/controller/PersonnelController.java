@@ -42,23 +42,27 @@ public class PersonnelController {
     }
 
 
-
-    @GetMapping("/personnels/{id}")
-    PersonnelEntity one(@PathVariable Long id) {
-
-        return repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("personnel with id = "+id));
-    }
-
     @DeleteMapping("/personnels/{id}")
     void deletePersonnel(@PathVariable Long id) {
         repository.deleteById(id);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/personnels/ehpad/{id}")
     List<PersonnelEntity> listPersonnelsEhpad(@PathVariable Long id){
-        return repository.listPersonnelEhpad(id);
+        return repository.listPersonnelEhpad(id).orElseThrow(() -> new NotFoundException("No Personnels found for ephads"+id));
     };
+
+    @GetMapping("/personnels/unites/{id}")
+    List<PersonnelEntity> findPersonnelByUnite(@PathVariable Long id){
+        return repository.findPersonnelByUnite(id).orElseThrow(() -> new NotFoundException("No Personnels found for unite"+id));
+    };
+
+    @GetMapping("/personnels/ehpad/{id_ehpad}/unite/{id_unite}")
+    List<PersonnelEntity> findPersonnelByUniteAndEhpad(@PathVariable Long id_ehpad,@PathVariable Long id_unite ){
+        return repository.findPersonnelByUniteAndEhpad(id_unite,id_ehpad).orElseThrow(() -> new NotFoundException("No Personnels found for unite"+id_unite+ "of  ehpad" + id_ehpad));
+    };
+
+
+
 
 }

@@ -21,17 +21,4 @@ public class ResidentService {
         residentRepository.save(resident);
     }
 
-    @Transactional
-    public void addAll(Collection<ResidentEntity> residents) {
-        for (ResidentEntity resident : residents) {
-            residentRepository.save(resident);
-        }
-    }
-
-    @Transactional(readOnly = true)
-    public List<ResidentEntity> listAll() {
-        return residentRepository.findAll();
-
-    }
-
 }

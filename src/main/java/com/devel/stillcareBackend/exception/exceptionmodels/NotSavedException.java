@@ -4,11 +4,11 @@ import com.devel.stillcareBackend.exception.ExceptionHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NotFoundException extends RuntimeException {
+public class NotSavedException extends RuntimeException {
     private static final Logger logger = LoggerFactory.getLogger(ExceptionHelper.class);
 
-    public NotFoundException(String msg) {
-        super("Could not find" + msg);
+    public NotSavedException(String msg) {
+        super("Couldn't save " + msg);
         logger.error(msg);
 
     }
