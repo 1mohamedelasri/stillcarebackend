@@ -1,14 +1,14 @@
 package com.devel.stillcareBackend.model;
 
 import javax.persistence.*;
-import java.sql.Time;
+import java.sql.Date;
 
 @Entity
 @Table(name = "RESIDENT")
 public class ResidentEntity {
     private long idResident;
     private long idPersonnel;
-    private Time datenaissance;
+    private Date datenaissance;
     private String statut;
     private String nom;
     private String prenom;
@@ -36,11 +36,11 @@ public class ResidentEntity {
 
     @Basic
     @Column(name = "DATENAISSANCE")
-    public Time getDatenaissance() {
+    public Date getDatenaissance() {
         return datenaissance;
     }
 
-    public void setDatenaissance(Time datenaissance) {
+    public void setDatenaissance(Date datenaissance) {
         this.datenaissance = datenaissance;
     }
 

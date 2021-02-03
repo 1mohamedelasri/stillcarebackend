@@ -19,27 +19,27 @@ public class RendezvousController {
 
     // Aggregate root
     // tag::get-aggregate-root[]
-    @GetMapping("/Rendezvous")
+    @GetMapping("/rendezvous")
     List<RendezvousEntity> all() {
         return repository.findAll();
     }
     // end::get-aggregate-root[]
 
-    @PostMapping("/Rendezvous")
+    @PostMapping("/rendezvous")
     RendezvousEntity newRendezvous(@RequestBody RendezvousEntity newRendezvous) {
         return repository.save(newRendezvous);
     }
 
     // Single item
 
-    @GetMapping("/Rendezvous/{id}")
+    @GetMapping("/rendezvous/{id}")
     RendezvousEntity one(@PathVariable Long id) {
 
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Rendezvous avec id = " +id));
     }
 
-    @PutMapping("/Rendezvous/{id}")
+    @PutMapping("/rendezvous/{id}")
     RendezvousEntity replaceRendezvous(@RequestBody RendezvousEntity newRendezvous, @PathVariable Long id) {
 
         return repository.findById(id)
@@ -60,19 +60,19 @@ public class RendezvousController {
                 });
     }
 
-    @DeleteMapping("/Rendezvous/{id}")
+    @DeleteMapping("/rendezvous/{id}")
     void deleteRendezvous(@PathVariable Long id) {
         repository.deleteById(id);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/Rendezvous/personnel/{id}")
+    @GetMapping("/rendezvous/personnel/{id}")
     List<RendezvousEntity> getRdvByPersonnel(@PathVariable long id){
         return repository.rdvByPersonnelid(id);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/Rendezvous/resident/{id}")
+    @GetMapping("/rendezvous/resident/{id}")
     List<RendezvousEntity> getRdvByCreneau(@PathVariable long id){
         return repository.rdvByCreneauid(id);
     }
