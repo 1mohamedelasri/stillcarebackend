@@ -3,15 +3,16 @@ package com.devel.stillcareBackend.controller;
 import com.devel.stillcareBackend.exception.ExceptionHelper;
 import com.devel.stillcareBackend.exception.exceptionmodels.BadParametersException;
 import com.devel.stillcareBackend.exception.exceptionmodels.NotFoundException;
-import com.devel.stillcareBackend.exception.exceptionmodels.NotSavedException;
 import com.devel.stillcareBackend.model.ResidentEntity;
 import com.devel.stillcareBackend.repositories.ResidentRepository;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -25,14 +26,18 @@ public class ResidentController {
     }
 
 
-    // Aggregate root
-    // tag::get-aggregate-root[]
+    @GetMapping("/residents/pages")
+    Page<ResidentEntity> findAll(@RequestParam Optional<Integer> page, @RequestParam Optional<Integer> limit) {
+        return repository.findAllByPage(PageRequest.of(page.orElse(1),limit.orElse(1)));
+    }
+
     @GetMapping("/residents")
     List<ResidentEntity> all() {
         return repository.findAll();
     }
-    // end::get-aggregate-root[]
-    @CrossOrigin(origins = "http://localhost:4200")
+
+
+
     @PostMapping("/residents")
     ResidentEntity newResident(@RequestBody ResidentEntity newResident) {
         var obj =  repository.save(newResident);

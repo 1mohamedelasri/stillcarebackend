@@ -1,10 +1,13 @@
 package com.devel.stillcareBackend.controller;
 
+import com.devel.stillcareBackend.exception.ExceptionHelper;
 import com.devel.stillcareBackend.exception.exceptionmodels.BadParametersException;
 import com.devel.stillcareBackend.exception.exceptionmodels.NotFoundException;
 import com.devel.stillcareBackend.model.PersonnelEntity;
 import com.devel.stillcareBackend.model.ResidentEntity;
 import com.devel.stillcareBackend.repositories.PersonnelRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +17,8 @@ import java.util.Map;
 public class PersonnelController {
 
     private final PersonnelRepository repository;
+
+    private static final Logger logger = LoggerFactory.getLogger(ExceptionHelper.class);
 
     PersonnelController(PersonnelRepository repository) {
         this.repository = repository;
@@ -33,7 +38,6 @@ public class PersonnelController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/personnels/athentication")
     PersonnelEntity one(@RequestBody Map<String,String> playload) {
         if(playload == null) throw new BadParametersException("login : " + playload);
