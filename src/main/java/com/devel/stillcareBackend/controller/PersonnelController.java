@@ -52,6 +52,13 @@ public class PersonnelController {
                 .orElseThrow(() -> new NotFoundException("personnel with id = "+id_ehpad));
     }
 
+    @GetMapping("/personnels/ehpad/{id_ehpad}")
+    PersonnelEntity one(@PathVariable Long id_ehpad) {
+
+        return repository.findById(id_ehpad)
+                .orElseThrow(() -> new NotFoundException("personnel with id = "+id));
+    }
+
     @DeleteMapping("/personnels/{id}")
     void deletePersonnel(@PathVariable Long id) {
         repository.deleteById(id);
