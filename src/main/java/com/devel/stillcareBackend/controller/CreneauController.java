@@ -97,4 +97,11 @@ public class CreneauController {
         return repository.CreneauSansRdv(id);
     }
 
+    @GetMapping("/creneaux/resident/libre/{id}")
+    List<CreneauEntity> getCreneauByResident(@PathVariable Long id) {
+        return repository.CreneauLibreResident(id);
+    }
+
+
+
 }

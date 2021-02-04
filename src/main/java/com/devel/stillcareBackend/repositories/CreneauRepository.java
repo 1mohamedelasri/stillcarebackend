@@ -12,4 +12,10 @@ public interface CreneauRepository extends JpaRepository<CreneauEntity, CreneauE
     @Query("select t from CreneauEntity t where t.idPersonnel=:id and t.datedebut not in (select dateCreneau from RendezvousEntity where idPersonnelcreneau = :id)")
     public List<CreneauEntity> CreneauSansRdv(@Param("id") Long id);
 
+    @Query("select t from CreneauEntity t join ResidentEntity r on t.idPersonnel=r.idPersonnel where r.idResident = :id and t.etat='disponible'")
+    public List<CreneauEntity> CreneauLibreResident(@Param("id") Long id);
+
+
+
+
 }

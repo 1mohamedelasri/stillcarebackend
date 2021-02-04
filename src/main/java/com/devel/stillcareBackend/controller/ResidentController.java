@@ -86,7 +86,17 @@ public class ResidentController {
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/residents/ehpad/{id}")
     List<ResidentEntity> listResidentEhpad(@PathVariable Long id){
-     return repository.listResidentEhpad(id);
+        return repository.listResidentEhpad(id);
     };
+
+    @GetMapping("/residents/contact/{id}")
+    List<ResidentEntity> listResidentContact(@PathVariable Long id){
+        return repository.findByContact(id);
+    };
+
+
+
+
+
 
 }

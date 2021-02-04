@@ -27,4 +27,7 @@ public interface ResidentRepository extends JpaRepository<ResidentEntity,Long>{
     @Query("select r from ResidentEntity r")
     Page<ResidentEntity> findAllByPage(Pageable pageable);
 
+    @Query("select res from ResidentEntity res join ResidentprocheEntity proch on res.idResident = proch.idResident where proch.idContact = :id")
+    public List<ResidentEntity> findByContact(@Param("id") long id);
+
 }

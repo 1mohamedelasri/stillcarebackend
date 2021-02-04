@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 public class CompteService {
     @Autowired
@@ -19,11 +21,11 @@ public class CompteService {
 
     @Transactional
     public ContactEntity SaveContactWithResident(ContactWithResident obj) {
-        ContactEntity contact = contactRepository.save(obj.getContact());
-
+        contactRepository.save(obj.getContact());
+        ContactEntity contact = contactRepository.authenticateContact(obj.getContact().getFirebasetoken()).get();
         for (ResidentIds resident: obj.getResidentIds() ) {
             ResidentprocheEntity entity = new ResidentprocheEntity();
-            entity.setIdContact(obj.getContact().getIdContact());
+            entity.setIdContact(contact.getIdContact());
             entity.setIdResident(resident.id);
             entity.setLienfamilial(resident.lienFamille);
             residentprocheRepository.save(entity);

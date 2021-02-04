@@ -81,4 +81,11 @@ public class RendezvousController {
     List<RendezvousEntity> getRdvByCreneau(@PathVariable long id){
         return repository.rdvByResidentid(id);
     }
+
+    @GetMapping("/rendezvous/resident/{idContact}/{idResident}")
+    List<RendezvousEntity> getRdvByResidentContact(@PathVariable long idResident, @PathVariable long idContact){
+        return repository.rdvByResidentContact(idResident,idContact);
+    }
+
+
 }
