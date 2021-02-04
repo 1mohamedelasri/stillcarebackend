@@ -32,7 +32,7 @@ public class RendezvousController {
 
     @PostMapping("/rendezvous")
     RendezvousEntity newRendezvous(@RequestBody RendezvousEntity newRendezvous) {
-        return repository.save(newRendezvous);
+        return service.ajouterRdv(newRendezvous);
     }
 
     // Single item

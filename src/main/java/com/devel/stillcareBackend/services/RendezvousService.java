@@ -1,14 +1,13 @@
 package com.devel.stillcareBackend.services;
 
 
+import com.devel.stillcareBackend.model.CreneauEntity;
 import com.devel.stillcareBackend.model.CreneauEntityPK;
 import com.devel.stillcareBackend.model.RendezvousEntity;
 import com.devel.stillcareBackend.repositories.CreneauRepository;
 import com.devel.stillcareBackend.repositories.InviteRdvRepository;
 import com.devel.stillcareBackend.repositories.RendezvousRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,5 +54,17 @@ public class RendezvousService {
         creneauRepository.getOne(creneauid).setEtat("disponible");
 
     }
+
+    @Transactional
+    public RendezvousEntity ajouterRdv(RendezvousEntity rdv){
+        CreneauEntity cr= new CreneauEntity();
+        cr.setDatedebut(rdv.getDateCreneau());
+        cr.setIdPersonnel(rdv.getIdPersonnelcreneau());
+        cr.setEtat("programmé");
+        creneauRepository.save(cr);
+        return rendezvousRepository.save(rdv);
+
+    }
+
 
 }
