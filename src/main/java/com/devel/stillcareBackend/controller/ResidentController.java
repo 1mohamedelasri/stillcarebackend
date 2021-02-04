@@ -31,12 +31,6 @@ public class ResidentController {
         return repository.findAllByPage(PageRequest.of(page.orElse(1),limit.orElse(1)));
     }
 
-    @GetMapping("/residents")
-    Page<ResidentEntity> findAll(@RequestParam Optional<Integer> page, @RequestParam Optional<Integer> limit, @) {
-        return repository.findAllByPage(PageRequest.of(page.orElse(0),limit.orElse(0)));
-    }
-
-
     @PostMapping("/residents")
     ResidentEntity newResident(@RequestBody ResidentEntity newResident) {
         var obj =  repository.save(newResident);
@@ -68,6 +62,12 @@ public class ResidentController {
         return repository.listResidentSansRdv();
     }
 
+    @GetMapping("/residents/ephad/{idehpad}/unite/{idunite}")
+    List<ResidentEntity> ResidentSandRdv(@PathVariable Long idehpad, @PathVariable Long idunite) {
+
+        return repository.listResidentEhpadUnite(idehpad,idunite);
+    }
+
     @PutMapping("/residents/{id}")
     ResidentEntity replaceResident(@RequestBody ResidentEntity newResident, @PathVariable Long id) {
 
@@ -88,10 +88,8 @@ public class ResidentController {
         repository.deleteById(id);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/residents/ehpad/{id}")
     List<ResidentEntity> listResidentEhpad(@PathVariable Long id){
      return repository.listResidentEhpad(id);
     };
-
 }
