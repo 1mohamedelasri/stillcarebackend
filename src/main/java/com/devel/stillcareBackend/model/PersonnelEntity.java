@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Time;
 
 @Entity
-@Table(name = "PERSONNEL", schema = "BADZII", catalog = "")
+@Table(name = "PERSONNEL")
 public class PersonnelEntity {
     private long idPersonnel;
     private String mail;

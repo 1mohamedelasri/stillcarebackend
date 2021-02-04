@@ -46,11 +46,11 @@ public class UniteController {
                 .orElseThrow(() -> new NotFoundException("Unite with id= "+ id));
     }
 
-    @GetMapping("/unites/{resident}/ehpad/{idephad}")
-    List<UniteEntity> findOtherUniteOfResidentByEphad(@PathVariable Long resident, @PathVariable Long idephad) {
-        return repository.findOtherUniteOfResidentByEphad(idephad,resident)
+    /*@GetMapping("/unites/ehpad/{idephad}")
+    List<UniteEntity> findOtherUniteOfResidentByEphad( @PathVariable Long idephad) {
+        return repository.findOtherUniteOfResidentByEphad(idephad)
                 .orElseThrow(() -> new NotFoundException("Unite with idphad = "+ idephad));
-    }
+    }*/
 
     @PostMapping("unites/replace/{id}")
     UniteEntity replaceUnitee(@RequestBody UniteEntity newUnite, @PathVariable Long id) {

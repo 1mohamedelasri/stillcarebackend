@@ -68,9 +68,21 @@ public class PersonnelController {
     };
 
 
-    @GetMapping("/personnels/search")
-    PersonnelEntity findPersonnelByUnite(@RequestParam Optional<String> key ){
-        return repository.searchByKey(key.orElse("")).orElseThrow(() -> new NotFoundException("No Personnels found for "+key));
+    @GetMapping("/personnels/search/{key}")
+    List<PersonnelEntity> findPersonnelByUnite(@PathVariable String key ){
+        return repository.searchByKey(key).orElseThrow(() -> new NotFoundException("No Personnels found for "+key));
     };
 
+    @PostMapping("/personnels/replace")
+    PersonnelEntity replaceResident(@RequestBody PersonnelEntity newpers) {
+
+        return repository.findById(newpers.getIdPersonnel())
+                .map(perso -> {
+                    perso.setFonction(perso.getFonction());
+                    perso.setMail(perso.getMail());
+                    perso.setNom(perso.getNom());
+                    perso.setPrenom(perso.getPrenom());
+                    return repository.save(perso);
+                }).orElseThrow();
+    }
 }
