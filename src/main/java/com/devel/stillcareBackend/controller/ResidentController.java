@@ -26,9 +26,9 @@ public class ResidentController {
     }
 
 
-    @GetMapping("/residents")
+    @GetMapping("/residents/pages")
     Page<ResidentEntity> findAll(@RequestParam Optional<Integer> page, @RequestParam Optional<Integer> limit) {
-        return repository.findAllByPage(PageRequest.of(page.orElse(0),limit.orElse(0)));
+        return repository.findAllByPage(PageRequest.of(page.orElse(1),limit.orElse(1)));
     }
 
 
