@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 public class PersonnelController {
@@ -67,6 +68,9 @@ public class PersonnelController {
     };
 
 
-
+    @GetMapping("/personnels/search")
+    PersonnelEntity findPersonnelByUnite(@RequestParam Optional<String> key ){
+        return repository.searchByKey(key.orElse("")).orElseThrow(() -> new NotFoundException("No Personnels found for "+key));
+    };
 
 }

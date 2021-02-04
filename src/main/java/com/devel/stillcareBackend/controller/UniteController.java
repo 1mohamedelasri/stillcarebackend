@@ -52,7 +52,7 @@ public class UniteController {
                 .orElseThrow(() -> new NotFoundException("Unite with idphad = "+ idephad));
     }
 
-    @PutMapping("/unites/{id}")
+    @PostMapping("unites/replace/{id}")
     UniteEntity replaceUnitee(@RequestBody UniteEntity newUnite, @PathVariable Long id) {
 
         return repository.findById(id)

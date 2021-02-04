@@ -26,6 +26,8 @@ public class ExceptionHelper {
         @ResponseStatus(HttpStatus.BAD_REQUEST)
         String handleUnauthorizedException(HttpClientErrorException.NotFound ex) {
                 logger.error("Invalid Input Exception: ",ex.getMessage());
+                System.out.println(ex.getMessage());
+
                 return ex.getMessage();
         }
 
@@ -35,6 +37,8 @@ public class ExceptionHelper {
         @ResponseStatus(HttpStatus.BAD_REQUEST)
         String handleUnauthorizedException(HttpClientErrorException.Unauthorized ex) {
                 logger.error("Unauthorized Exception: ",ex.getMessage());
+                System.out.println(ex.getMessage());
+
                 return ex.getMessage();
         }
 
@@ -43,6 +47,8 @@ public class ExceptionHelper {
         @ResponseStatus(HttpStatus.BAD_REQUEST)
         String handleBadParametersException(BadParametersException ex) {
                 logger.error("Unauthorized Exception: ",ex.getMessage());
+                System.out.println(ex.getMessage());
+
                 return ex.getMessage();
         }
 
@@ -52,6 +58,8 @@ public class ExceptionHelper {
         @ResponseStatus(HttpStatus.NOT_FOUND)
         String employeeNotFoundHandler(NotFoundException ex) {
                 logger.error("Exception: ",ex.getMessage());
+                System.out.println(ex.getMessage());
+
                 return ex.getMessage();
         }
 
@@ -61,6 +69,8 @@ public class ExceptionHelper {
         @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
         String handleException(Exception ex) {
                 logger.error("Exception: ",ex.getMessage());
+                System.out.println(ex.getMessage());
+
                 return ex.getMessage();
         }
 
@@ -69,6 +79,8 @@ public class ExceptionHelper {
         @ResponseStatus(HttpStatus.BAD_REQUEST)
         String handleSQLException(SQLException ex) {
                 logger.error("Unauthorized Exception: ",ex.getMessage());
+                System.out.println(ex.getMessage());
+
                 return ex.getMessage();
         }
 
@@ -77,6 +89,8 @@ public class ExceptionHelper {
         @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
         String handleSQLException(NotSavedException ex) {
                 logger.error(" Exception: ",ex.getMessage());
+                System.out.println(ex.getMessage());
+
                 return ex.getMessage();
         }
 
@@ -85,6 +99,7 @@ public class ExceptionHelper {
         @ResponseStatus(HttpStatus.BAD_REQUEST)
         String noHandlerFoundException(NoHandlerFoundException ex) {
                 logger.error(" Exception: ",ex.getMessage());
+                System.out.println(ex.getMessage());
                 return ex.getMessage();
         }
 
