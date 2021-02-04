@@ -79,7 +79,8 @@ public class CreneauController {
         CreneauEntityPK creneauPK = new CreneauEntityPK();
         creneauPK.setIdPersonnel(personnel);
         creneauPK.setDatedebut(localDate);
-
+        System.out.println(creneauPK);
+        System.out.println(localDate);
         repository.deleteById(creneauPK);
     }
 

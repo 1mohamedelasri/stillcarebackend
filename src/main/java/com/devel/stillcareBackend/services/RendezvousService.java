@@ -1,20 +1,31 @@
 package com.devel.stillcareBackend.services;
 
 
+import com.devel.stillcareBackend.model.CreneauEntityPK;
 import com.devel.stillcareBackend.model.RendezvousEntity;
+import com.devel.stillcareBackend.repositories.CreneauRepository;
+import com.devel.stillcareBackend.repositories.InviteRdvRepository;
 import com.devel.stillcareBackend.repositories.RendezvousRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
 
-@Component
+@Service
 public class RendezvousService {
 
     @Autowired
+    private InviteRdvRepository inviteRdvRepository;
+
+    @Autowired
     private RendezvousRepository rendezvousRepository;
+
+    @Autowired
+    private CreneauRepository creneauRepository;
 
     @Transactional
     public void add(RendezvousEntity rendezvous) {
@@ -31,6 +42,17 @@ public class RendezvousService {
     @Transactional(readOnly = true)
     public List<RendezvousEntity> listAll() {
         return rendezvousRepository.findAll();
+
+    }
+    @Transactional
+    public void deleteRdv(long id){
+        inviteRdvRepository.deleteByRdv(id);
+        RendezvousEntity rdv = rendezvousRepository.getOne(id);
+        CreneauEntityPK creneauid = new CreneauEntityPK();
+        creneauid.setDatedebut(rdv.getDateCreneau());
+        creneauid.setIdPersonnel(rdv.getIdPersonnelcreneau());
+        rendezvousRepository.deleteById(id);
+        creneauRepository.getOne(creneauid).setEtat("disponible");
 
     }
 
