@@ -15,7 +15,6 @@ public interface UniteRepository extends JpaRepository<UniteEntity,Long>{
     @Query("select t from UniteEntity t where t.idEhpad = :id_ehpad")
     public Optional<List<UniteEntity>> findUnitesByEhpad(@Param("id_ehpad") long id_ehpad);
 
-    // PENSER OPTIMISATION
-    @Query("select u from UniteEntity u join ResidentEntity r on(r.idResident = :id_resident and r.idUnite<> u.idUnite  and u.idEhpad = :id_ehpad and u.idUnite <> r.idUnite)")
-    public Optional<List<UniteEntity>> findOtherUniteOfResidentByEphad(@Param("id_ehpad") long id_ehpad,@Param("id_resident") long id_resident);
+    @Query("select u from UniteEntity u where u.idEhpad = :id_ehpad")
+    public Optional<List<UniteEntity>> findOtherUniteOfResidentByEphad(@Param("id_ehpad") long id_ehpad);
 }

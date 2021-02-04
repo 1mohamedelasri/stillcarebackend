@@ -1,6 +1,7 @@
 package com.devel.stillcareBackend.model;
 
 import javax.persistence.*;
+import java.sql.Time;
 
 @Entity
 @Table(name = "PERSONNEL")
@@ -14,6 +15,8 @@ public class PersonnelEntity {
     private String password;
     private String nom;
     private String prenom;
+    private Time datedebut;
+    private Time datefin;
 
     @Id
     @Column(name = "ID_PERSONNEL")
@@ -105,6 +108,26 @@ public class PersonnelEntity {
         this.prenom = prenom;
     }
 
+    @Basic
+    @Column(name = "DATEDEBUT")
+    public Time getDatedebut() {
+        return datedebut;
+    }
+
+    public void setDatedebut(Time datedebut) {
+        this.datedebut = datedebut;
+    }
+
+    @Basic
+    @Column(name = "DATEFIN")
+    public Time getDatefin() {
+        return datefin;
+    }
+
+    public void setDatefin(Time datefin) {
+        this.datefin = datefin;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -121,6 +144,8 @@ public class PersonnelEntity {
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
         if (nom != null ? !nom.equals(that.nom) : that.nom != null) return false;
         if (prenom != null ? !prenom.equals(that.prenom) : that.prenom != null) return false;
+        if (datedebut != null ? !datedebut.equals(that.datedebut) : that.datedebut != null) return false;
+        if (datefin != null ? !datefin.equals(that.datefin) : that.datefin != null) return false;
 
         return true;
     }
@@ -136,6 +161,8 @@ public class PersonnelEntity {
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (nom != null ? nom.hashCode() : 0);
         result = 31 * result + (prenom != null ? prenom.hashCode() : 0);
+        result = 31 * result + (datedebut != null ? datedebut.hashCode() : 0);
+        result = 31 * result + (datefin != null ? datefin.hashCode() : 0);
         return result;
     }
 }

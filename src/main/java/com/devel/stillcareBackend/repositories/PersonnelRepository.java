@@ -22,6 +22,6 @@ public interface PersonnelRepository extends JpaRepository<PersonnelEntity,Long>
     public Optional<List<PersonnelEntity>> findPersonnelByUniteAndEhpad(@Param("id_unite") long id_unite, @Param("id_ehpad") long id_ehpad);
 
     @Query("select t from PersonnelEntity t where LOWER(t.nom) like %:key% or LOWER(t.prenom) like %:key% ")
-    public Optional<PersonnelEntity> searchByKey(@Param("key") String key);
+    public Optional<List<PersonnelEntity>> searchByKey(@Param("key") String key);
 
 }

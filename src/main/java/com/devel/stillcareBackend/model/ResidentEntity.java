@@ -7,12 +7,14 @@ import java.util.Date;
 @Table(name = "RESIDENT")
 public class ResidentEntity {
     private long idResident;
-    private long idPersonnel;
-    private Date datenaissance;
-    private String statut;
     private String nom;
     private String prenom;
+    private Date datenaissance;
+    private String statut;
     private Long idUnite;
+    private Date dateaffectation;
+    private long idPersonnel;
+    private Date dateaffectperson;
 
     @Id
     @Column(name = "ID_RESIDENT")
@@ -22,36 +24,6 @@ public class ResidentEntity {
 
     public void setIdResident(long idResident) {
         this.idResident = idResident;
-    }
-
-    @Basic
-    @Column(name = "ID_PERSONNEL")
-    public long getIdPersonnel() {
-        return idPersonnel;
-    }
-
-    public void setIdPersonnel(long idPersonnel) {
-        this.idPersonnel = idPersonnel;
-    }
-
-    @Basic
-    @Column(name = "DATENAISSANCE")
-    public Date getDatenaissance() {
-        return datenaissance;
-    }
-
-    public void setDatenaissance(Date datenaissance) {
-        this.datenaissance = datenaissance;
-    }
-
-    @Basic
-    @Column(name = "STATUT")
-    public String getStatut() {
-        return statut;
-    }
-
-    public void setStatut(String statut) {
-        this.statut = statut;
     }
 
     @Basic
@@ -75,6 +47,26 @@ public class ResidentEntity {
     }
 
     @Basic
+    @Column(name = "DATENAISSANCE")
+    public Date getDatenaissance() {
+        return datenaissance;
+    }
+
+    public void setDatenaissance(Date datenaissance) {
+        this.datenaissance = datenaissance;
+    }
+
+    @Basic
+    @Column(name = "STATUT")
+    public String getStatut() {
+        return statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
+    }
+
+    @Basic
     @Column(name = "ID_UNITE")
     public Long getIdUnite() {
         return idUnite;
@@ -82,6 +74,36 @@ public class ResidentEntity {
 
     public void setIdUnite(Long idUnite) {
         this.idUnite = idUnite;
+    }
+
+    @Basic
+    @Column(name = "DATEAFFECTATION")
+    public Date getDateaffectation() {
+        return dateaffectation;
+    }
+
+    public void setDateaffectation(Date dateaffectation) {
+        this.dateaffectation = dateaffectation;
+    }
+
+    @Basic
+    @Column(name = "ID_PERSONNEL")
+    public long getIdPersonnel() {
+        return idPersonnel;
+    }
+
+    public void setIdPersonnel(long idPersonnel) {
+        this.idPersonnel = idPersonnel;
+    }
+
+    @Basic
+    @Column(name = "DATEAFFECTPERSON")
+    public Date getDateaffectperson() {
+        return dateaffectperson;
+    }
+
+    public void setDateaffectperson(Date dateaffectperson) {
+        this.dateaffectperson = dateaffectperson;
     }
 
     @Override
@@ -93,12 +115,16 @@ public class ResidentEntity {
 
         if (idResident != that.idResident) return false;
         if (idPersonnel != that.idPersonnel) return false;
+        if (nom != null ? !nom.equals(that.nom) : that.nom != null) return false;
+        if (prenom != null ? !prenom.equals(that.prenom) : that.prenom != null) return false;
         if (datenaissance != null ? !datenaissance.equals(that.datenaissance) : that.datenaissance != null)
             return false;
         if (statut != null ? !statut.equals(that.statut) : that.statut != null) return false;
-        if (nom != null ? !nom.equals(that.nom) : that.nom != null) return false;
-        if (prenom != null ? !prenom.equals(that.prenom) : that.prenom != null) return false;
         if (idUnite != null ? !idUnite.equals(that.idUnite) : that.idUnite != null) return false;
+        if (dateaffectation != null ? !dateaffectation.equals(that.dateaffectation) : that.dateaffectation != null)
+            return false;
+        if (dateaffectperson != null ? !dateaffectperson.equals(that.dateaffectperson) : that.dateaffectperson != null)
+            return false;
 
         return true;
     }
@@ -106,12 +132,14 @@ public class ResidentEntity {
     @Override
     public int hashCode() {
         int result = (int) (idResident ^ (idResident >>> 32));
-        result = 31 * result + (int) (idPersonnel ^ (idPersonnel >>> 32));
-        result = 31 * result + (datenaissance != null ? datenaissance.hashCode() : 0);
-        result = 31 * result + (statut != null ? statut.hashCode() : 0);
         result = 31 * result + (nom != null ? nom.hashCode() : 0);
         result = 31 * result + (prenom != null ? prenom.hashCode() : 0);
+        result = 31 * result + (datenaissance != null ? datenaissance.hashCode() : 0);
+        result = 31 * result + (statut != null ? statut.hashCode() : 0);
         result = 31 * result + (idUnite != null ? idUnite.hashCode() : 0);
+        result = 31 * result + (dateaffectation != null ? dateaffectation.hashCode() : 0);
+        result = 31 * result + (int) (idPersonnel ^ (idPersonnel >>> 32));
+        result = 31 * result + (dateaffectperson != null ? dateaffectperson.hashCode() : 0);
         return result;
     }
 }

@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "TABLETTE")
 public class TabletteEntity {
     private long ntablette;
+    private Long idEhpad;
     private String etat;
 
     @Id
@@ -16,6 +17,16 @@ public class TabletteEntity {
 
     public void setNtablette(long ntablette) {
         this.ntablette = ntablette;
+    }
+
+    @Basic
+    @Column(name = "ID_EHPAD")
+    public Long getIdEhpad() {
+        return idEhpad;
+    }
+
+    public void setIdEhpad(Long idEhpad) {
+        this.idEhpad = idEhpad;
     }
 
     @Basic
@@ -36,6 +47,7 @@ public class TabletteEntity {
         TabletteEntity that = (TabletteEntity) o;
 
         if (ntablette != that.ntablette) return false;
+        if (idEhpad != null ? !idEhpad.equals(that.idEhpad) : that.idEhpad != null) return false;
         if (etat != null ? !etat.equals(that.etat) : that.etat != null) return false;
 
         return true;
@@ -44,6 +56,7 @@ public class TabletteEntity {
     @Override
     public int hashCode() {
         int result = (int) (ntablette ^ (ntablette >>> 32));
+        result = 31 * result + (idEhpad != null ? idEhpad.hashCode() : 0);
         result = 31 * result + (etat != null ? etat.hashCode() : 0);
         return result;
     }

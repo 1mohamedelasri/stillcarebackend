@@ -3,6 +3,8 @@ package com.devel.stillcareBackend.controller;
 import com.devel.stillcareBackend.exception.exceptionmodels.NotFoundException;
 import com.devel.stillcareBackend.model.RendezvousEntity;
 import com.devel.stillcareBackend.repositories.RendezvousRepository;
+import com.devel.stillcareBackend.services.RendezvousService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +13,9 @@ import java.util.List;
 public class RendezvousController {
 
     private final RendezvousRepository repository;
+
+    @Autowired
+    RendezvousService service;
 
     RendezvousController(RendezvousRepository repository) {
         this.repository = repository;
@@ -27,7 +32,7 @@ public class RendezvousController {
 
     @PostMapping("/rendezvous")
     RendezvousEntity newRendezvous(@RequestBody RendezvousEntity newRendezvous) {
-        return repository.save(newRendezvous);
+        return service.ajouterRdv(newRendezvous);
     }
 
     // Single item
@@ -62,7 +67,7 @@ public class RendezvousController {
 
     @DeleteMapping("/rendezvous/{id}")
     void deleteRendezvous(@PathVariable Long id) {
-        repository.deleteById(id);
+        service.deleteRdv(id);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
@@ -74,6 +79,13 @@ public class RendezvousController {
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/rendezvous/resident/{id}")
     List<RendezvousEntity> getRdvByCreneau(@PathVariable long id){
-        return repository.rdvByCreneauid(id);
+        return repository.rdvByResidentid(id);
     }
+
+    @GetMapping("/rendezvous/resident/{idContact}/{idResident}")
+    List<RendezvousEntity> getRdvByResidentContact(@PathVariable long idResident, @PathVariable long idContact){
+        return repository.rdvByResidentContact(idResident,idContact);
+    }
+
+
 }
