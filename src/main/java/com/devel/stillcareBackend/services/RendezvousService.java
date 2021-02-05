@@ -8,14 +8,23 @@ import com.devel.stillcareBackend.repositories.CreneauRepository;
 import com.devel.stillcareBackend.repositories.InviteRdvRepository;
 import com.devel.stillcareBackend.repositories.RendezvousRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import java.util.Collection;
 import java.util.List;
 
 @Service
 public class RendezvousService {
+
+    @PersistenceContext
+    EntityManager em;
+    EntityManagerFactory emf;
+
 
     @Autowired
     private InviteRdvRepository inviteRdvRepository;
@@ -64,6 +73,13 @@ public class RendezvousService {
         creneauRepository.save(cr);
         return rendezvousRepository.save(rdv);
 
+    }
+
+    @Transactional
+    public void deleteRendezVous(long src, long dst){
+        String str = "select transfertRdv("+src+", "+dst+" ) from dual";
+
+        Query query = (Query) em.createNativeQuery(str);
     }
 
 

@@ -5,8 +5,10 @@ import com.devel.stillcareBackend.model.RendezvousEntity;
 import com.devel.stillcareBackend.repositories.RendezvousRepository;
 import com.devel.stillcareBackend.services.RendezvousService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @RestController
@@ -87,5 +89,13 @@ public class RendezvousController {
         return repository.rdvByResidentContact(idResident,idContact);
     }
 
+    @PostMapping("/rendezvous/deplacer/{src}/{dest}")
+    void transfererRendezVous(@PathVariable long src,@PathVariable long dest) {
+        service.deleteRendezVous(src,dest);
+    }
 
+    @GetMapping("/rendezvous/{idrdv}/search/{key}")
+    void transfererRendezVous(@PathVariable Long idrdv, @PathVariable String key ) {
+        repository.personnelBysearch(idrdv,key);
+    }
 }
