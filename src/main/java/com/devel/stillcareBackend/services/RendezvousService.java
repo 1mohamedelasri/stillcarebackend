@@ -1,11 +1,11 @@
 package com.devel.stillcareBackend.services;
 
 
-import com.devel.stillcareBackend.model.CreneauEntity;
-import com.devel.stillcareBackend.model.CreneauEntityPK;
-import com.devel.stillcareBackend.model.RendezvousEntity;
+import com.devel.stillcareBackend.model.*;
+import com.devel.stillcareBackend.model.costume.RendezvousWithInvites;
 import com.devel.stillcareBackend.repositories.CreneauRepository;
 import com.devel.stillcareBackend.repositories.InviteRdvRepository;
+import com.devel.stillcareBackend.repositories.InviteRepository;
 import com.devel.stillcareBackend.repositories.RendezvousRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
@@ -25,6 +25,9 @@ public class RendezvousService {
     EntityManager em;
     EntityManagerFactory emf;
 
+
+    @Autowired
+    private InviteRepository inviteRepository;
 
     @Autowired
     private InviteRdvRepository inviteRdvRepository;
@@ -65,13 +68,23 @@ public class RendezvousService {
     }
 
     @Transactional
-    public RendezvousEntity ajouterRdv(RendezvousEntity rdv){
+    public void ajouterRdv(RendezvousWithInvites rdv){
         CreneauEntity cr= new CreneauEntity();
-        cr.setDatedebut(rdv.getDateCreneau());
-        cr.setIdPersonnel(rdv.getIdPersonnelcreneau());
+        cr.setDatedebut(rdv.getRendezvous().getDateCreneau());
+        cr.setIdPersonnel(rdv.getRendezvous().getIdPersonnelcreneau());
         cr.setEtat("programmé");
         creneauRepository.save(cr);
-        return rendezvousRepository.save(rdv);
+        inviteRepository.saveAll( rdv.getInviterlist());
+        rendezvousRepository.save(rdv.getRendezvous());
+        long i=rendezvousRepository.getCurrentSeriesId();
+        for (InviteEntity inviter:rdv.getInviterlist()) {
+            InviteRdvEntity invrdv= new InviteRdvEntity();
+            invrdv.setIdRdv(i);
+            invrdv.setMailInvite(inviter.getMail());
+            inviteRdvRepository.save(invrdv);
+            
+        }
+
 
     }
 
@@ -81,6 +94,8 @@ public class RendezvousService {
 
         Query query = (Query) em.createNativeQuery(str);
     }
+
+
 
 
 }

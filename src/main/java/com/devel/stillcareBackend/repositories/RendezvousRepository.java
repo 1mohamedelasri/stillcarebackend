@@ -24,6 +24,9 @@ public interface RendezvousRepository extends JpaRepository<RendezvousEntity,Lon
     @Query("select t from RendezvousEntity t where t.idResident = :idResident and t.idContact = :idContact")
     public List<RendezvousEntity> rdvByResidentContact(@Param("idResident") long idResident, @Param("idContact") long idContact);
 
+    @Query(value = "SELECT seq_num_rendezvous.currval FROM dual", nativeQuery =
+            true)
+    Long getCurrentSeriesId();
     /*@Modifying
     @Query(nativeQuery = true, value = "SELECT * FROM TABLE(transfertRdv(4, 1 ))")
     void transfererRendezVous(@Param("src") long src, @Param("dst") long dst);*/
