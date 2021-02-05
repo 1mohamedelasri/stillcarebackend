@@ -2,6 +2,7 @@ package com.devel.stillcareBackend.controller;
 
 import com.devel.stillcareBackend.exception.exceptionmodels.NotFoundException;
 import com.devel.stillcareBackend.model.RendezvousEntity;
+import com.devel.stillcareBackend.model.costume.RendezvousWithInvites;
 import com.devel.stillcareBackend.repositories.RendezvousRepository;
 import com.devel.stillcareBackend.services.RendezvousService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,8 @@ public class RendezvousController {
     // end::get-aggregate-root[]
 
     @PostMapping("/rendezvous")
-    RendezvousEntity newRendezvous(@RequestBody RendezvousEntity newRendezvous) {
-        return service.ajouterRdv(newRendezvous);
+    void newRendezvous(@RequestBody RendezvousWithInvites rdvwithcontacts) {
+         service.ajouterRdv(rdvwithcontacts);
     }
 
     // Single item
@@ -86,6 +87,8 @@ public class RendezvousController {
     List<RendezvousEntity> getRdvByResidentContact(@PathVariable long idResident, @PathVariable long idContact){
         return repository.rdvByResidentContact(idResident,idContact);
     }
+
+
 
 
 }
