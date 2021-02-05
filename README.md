@@ -19,15 +19,25 @@ spring.datasource.url=jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521/IM2A
 
 [+] Parametres en commun entre configuration SSH et VPN 
 
-
 #SSHUsername
-ssh.forward.username=elasrim
+ssh.forward.username= votre username
 #SSHPassword
-ssh.forward.password= votre password crypté
+ssh.forward.password= ENC(clé public)
 spring.datasource.username=elasrim
 spring.datasource.password= vous mot de passe pou la base de donnée
 server.port=8085
 
-Notez bien que 
+Je vous recommende de mettre une configuration au debut avec un VPN pour une premiere utilisation.
+
+Car quand on utiliser une configuration SSH, il faut crypter votre mot de passe, ssh.forward.password 
+pour faire ça, vous pouvez aller sur https://www.devglan.com/online-tools/jasypt-online-encryption-decryption 
+vous devez generer un mote passe public et privé 
+
+on met la clé publique ssh.forward.password= ENC(clé public)
+
+et ensuite on peut compiler avec notre clé privé
+
+java -Djasypt.encryptor.password=**VOTRE_CLé_PRIVé** -jar target/stillca
+re-1.0.jar
 
 
